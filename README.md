@@ -9,7 +9,7 @@ npm install
 npm run dev
 ```
 
-Open http://127.0.0.1:4173. Knock to enter, then choose a house. The map button opens all destinations. French and English have separate pages; switching language keeps the current destination.
+Open http://127.0.0.1:4173. Knock to enter, then choose a house. The artwork fills the screen; choose a house to open a section and use its village link to return. French and English have separate pages; switching language keeps the current destination.
 
 After editing, run `npm run build` and refresh. Tests: `npm run check`.
 
@@ -18,7 +18,7 @@ After editing, run `npm run build` and refresh. Tests: `npm run check`.
 - `src/content.mjs`: both languages and all 22 member placeholders. Fill `name`, `photo`, and `contribution.fr` / `contribution.en`. Put photos in `public/assets/` and use paths such as `/assets/member-01.jpg`. Add teachers and mentors to the same list when known; pagination adjusts automatically.
 - `scripts/build.mjs`: page layouts and content panels.
 - `public/styles.css`: all styling, including the positions of the clickable houses.
-- `public/app.js`: entrance, map dialog, page turning, and keyboard-accessible tabs.
+- `public/app.js`: entrance, page turning, and keyboard-accessible tabs.
 
 Game rules, team identities, real robot details, photos, journal entries, video, and tutorial still need the team's material. The album contains 22 slots, four per page. No achievements or robot specifications are invented.
 
@@ -68,7 +68,7 @@ Nothing has been committed, pushed, or deployed by this task.
 
 ## Checks and submission
 
-The generated pages pass HTML validation. `npm run check` verifies links, assets, locale navigation, all 22 reachable member slots, page turning, tab selection, keyboard Home, entrance navigation, and map controls in a DOM simulation. It does not claim browser rendering tests. Check the finished artwork and content on mobile/desktop Chrome, Firefox, and Safari before submission.
+The generated pages pass HTML validation. `npm run check` verifies links, assets, locale navigation, all 22 reachable member slots, page turning, tab selection, keyboard Home, and entrance navigation in a DOM simulation. It does not claim browser rendering tests. Check the finished artwork and content on mobile/desktop Chrome, Firefox, and Safari before submission.
 
 The supplied 2026 rubric requires CRC-server hosting for the final submission. Vercel can host the working site. Confirm the current season's rules and deadline, fill all placeholders, and freeze the submitted version at the deadline.
 

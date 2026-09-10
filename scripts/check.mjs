@@ -59,12 +59,6 @@ async function load(lang, route) {
   const { window, document } = parseHTML(
     await readFile(`dist/${lang}/${route}/index.html`, "utf8"),
   );
-  const dialog = document.querySelector("dialog");
-  dialog.showModal = () => dialog.setAttribute("open", "");
-  dialog.close = () => {
-    dialog.removeAttribute("open");
-    dialog.dispatchEvent(new window.Event("close"));
-  };
   let destination;
   runInNewContext(script, {
     document,
@@ -116,12 +110,7 @@ for (const lang of ["fr", "en"]) {
   const entry = await load(lang, "");
   entry.document.querySelector("[data-knock]").click();
   assert.equal(entry.destination(), `/${lang}/village/`);
-  const d = entry.document;
-  d.querySelector("[data-open-map]").click();
-  assert.ok(d.querySelector("dialog").hasAttribute("open"));
-  d.querySelector("[data-close-map]").click();
-  assert.ok(!d.querySelector("dialog").hasAttribute("open"));
 }
 console.log(
-  `Passed: 23 pages, ${checked} local links/assets, 22 reachable members, entrance, album pagination, tabs, keyboard Home, locale links, and map controls.`,
+  `Passed: 23 pages, ${checked} local links/assets, 22 reachable members, entrance, album pagination, tabs, keyboard Home, and locale links.`,
 );

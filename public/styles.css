@@ -1299,3 +1299,189 @@ dialog nav a[aria-current] {
     margin-top: 4px;
   }
 }
+
+/* The village fills the viewport; controls float over the drawing. */
+.map-page {
+  height: 100svh;
+  min-height: 100svh;
+  overflow: hidden;
+}
+.world {
+  display: block;
+  padding: 0;
+  min-height: 0;
+  height: 100svh;
+  overflow: hidden;
+}
+.village-canvas {
+  width: 100%;
+  height: 100svh;
+  min-height: 0;
+  aspect-ratio: auto;
+}
+.map-art {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  opacity: 1;
+  mix-blend-mode: normal;
+}
+.entrance .map-art,
+.village .map-art {
+  opacity: 1;
+  filter: none;
+}
+.houses {
+  position: absolute;
+  width: max(100vw, 150svh);
+  height: max(100svh, 66.666667vw);
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+.map-title {
+  top: 46%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 42%;
+}
+.centered-school-logo {
+  width: clamp(105px, 17svh, 175px);
+  height: auto;
+  margin: 0 auto 14px;
+}
+.map-title h1 {
+  font-size: clamp(30px, 3.6vw, 53px);
+}
+.map-title p {
+  margin-top: 8px;
+}
+.invitation {
+  top: 50%;
+  padding: 22px 30px 28px;
+}
+.invitation .centered-school-logo {
+  width: clamp(90px, 15svh, 145px);
+  margin-bottom: 12px;
+}
+.invitation h1 {
+  font-size: clamp(38px, 6svh, 58px);
+}
+.floating-locale {
+  position: fixed;
+  top: 20px;
+  right: 24px;
+  z-index: 20;
+  border: 1px solid #777b5750;
+  border-radius: 4px;
+  background: #fff9e6dd;
+  padding: 9px 13px;
+  font:
+    700 14px SchoolManrope,
+    Arial,
+    sans-serif;
+  box-shadow: 1px 2px #48553420;
+}
+.site-footer,
+.map-page .site-footer {
+  position: fixed;
+  right: 12px;
+  bottom: 9px;
+  z-index: 10;
+  margin: 0;
+  padding: 0;
+  min-height: 0;
+  background: transparent;
+}
+.site-footer a {
+  font-size: 10px;
+  color: #37412f;
+  background: #f5f0dc9e;
+  padding: 2px 5px;
+  border-radius: 2px;
+  opacity: 0.5;
+}
+.site-footer a:hover,
+.site-footer a:focus-visible {
+  opacity: 1;
+}
+.room-world {
+  min-height: 100svh;
+  padding-top: 58px;
+  padding-bottom: 40px;
+}
+@media (max-width: 600px) {
+  .floating-locale {
+    top: 12px;
+    right: 12px;
+  }
+  .village .map-title {
+    top: 5%;
+    width: 90%;
+    transform: translateX(-50%);
+  }
+  .map-title .centered-school-logo {
+    width: clamp(82px, 14svh, 125px);
+    margin-bottom: 8px;
+  }
+  .map-title h1 {
+    font-size: clamp(30px, 8vw, 40px);
+    max-width: 100%;
+  }
+  .map-title p {
+    font-size: 22px;
+    margin-top: 5px;
+  }
+  .houses {
+    inset: 40% 18px 12%;
+    width: auto;
+    height: auto;
+    transform: none;
+    gap: 14px;
+  }
+  .house-label {
+    min-height: 52px;
+    padding: 10px 6px;
+  }
+  .cinema-sign {
+    bottom: 5%;
+  }
+  .invitation {
+    max-width: 85%;
+    padding: 20px 22px 25px;
+  }
+  .invitation .centered-school-logo {
+    width: clamp(85px, 15svh, 130px);
+  }
+  .room-world {
+    padding-top: 56px;
+  }
+}
+@media (max-height: 580px) {
+  .centered-school-logo {
+    width: 80px;
+    margin-bottom: 5px;
+  }
+  .map-title h1 {
+    font-size: 29px;
+  }
+  .map-title p {
+    font-size: 19px;
+  }
+  .invitation .centered-school-logo {
+    width: 70px;
+  }
+  .invitation {
+    padding: 12px 22px;
+  }
+  .invitation .whisper {
+    display: none;
+  }
+  .invitation h1 {
+    font-size: 34px;
+  }
+  .invitation p {
+    margin: 9px auto;
+  }
+}

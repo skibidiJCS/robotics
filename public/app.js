@@ -1,22 +1,3 @@
-const dialog = document.querySelector("#map-dialog");
-const openMap = document.querySelector("[data-open-map]");
-openMap.addEventListener("click", () => dialog.showModal());
-document
-  .querySelector("[data-close-map]")
-  .addEventListener("click", () => dialog.close());
-dialog.addEventListener("click", (event) => {
-  if (event.target === dialog) {
-    const r = dialog.getBoundingClientRect();
-    if (
-      event.clientX < r.left ||
-      event.clientX > r.right ||
-      event.clientY < r.top ||
-      event.clientY > r.bottom
-    )
-      dialog.close();
-  }
-});
-dialog.addEventListener("close", () => openMap.focus());
 const knock = document.querySelector("[data-knock]");
 knock?.addEventListener("click", (event) => {
   if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
