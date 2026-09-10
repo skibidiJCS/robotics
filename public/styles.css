@@ -1366,6 +1366,7 @@ dialog nav a[aria-current] {
 }
 .invitation h1 {
   font-size: clamp(38px, 6svh, 58px);
+  margin-bottom: 28px;
 }
 .floating-locale {
   position: fixed;
