@@ -39,8 +39,7 @@ button {
 a:focus-visible,
 button:focus-visible,
 [tabindex]:focus-visible {
-  outline: 3px dashed var(--blue);
-  outline-offset: 5px;
+  outline: none;
 }
 h1,
 h2,
