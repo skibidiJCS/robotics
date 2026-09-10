@@ -237,24 +237,7 @@ img {
 .house:nth-child(even) .house-label {
   transform: rotate(3deg);
 }
-.house-number {
-  font: 12px var(--body);
-  margin-right: 8px;
-  color: #7d755b;
-  vertical-align: middle;
-}
 
-.house-caption {
-  font: 18px var(--hand);
-  opacity: 0;
-  background: #fff6dc;
-  padding: 2px 8px;
-  border-radius: 3px;
-  position: absolute;
-  top: 104%;
-  white-space: nowrap;
-  pointer-events: none;
-}
 .house:hover,
 .house:focus-visible {
   z-index: 2;
@@ -265,10 +248,7 @@ img {
   background: #fffef3;
   transform: rotate(0) scale(1.08);
 }
-.house:hover .house-caption,
-.house:focus-visible .house-caption {
-  opacity: 1;
-}
+
 .cinema-sign {
   position: absolute;
   left: 4%;
@@ -870,9 +850,7 @@ dialog nav a[aria-current] {
     font-size: 21px;
     padding-inline: 12px;
   }
-  .house-caption {
-    display: none;
-  }
+
   .map-title p {
     font-size: 21px;
   }
@@ -983,10 +961,6 @@ dialog nav a[aria-current] {
     justify-content: center;
     gap: 5px;
     min-height: 63px;
-  }
-  .house-number {
-    margin-right: 2px;
-    font-size: 11px;
   }
 
   .house:hover,
@@ -1347,7 +1321,7 @@ dialog nav a[aria-current] {
   width: 42%;
 }
 .centered-school-logo {
-  width: clamp(105px, 17svh, 175px);
+  width: clamp(140px, 23svh, 230px);
   height: auto;
   margin: 0 auto 14px;
 }
@@ -1362,7 +1336,7 @@ dialog nav a[aria-current] {
   padding: 22px 30px 28px;
 }
 .invitation .centered-school-logo {
-  width: clamp(90px, 15svh, 145px);
+  width: clamp(115px, 19svh, 185px);
   margin-bottom: 12px;
 }
 .invitation h1 {
@@ -1422,7 +1396,7 @@ dialog nav a[aria-current] {
     transform: translateX(-50%);
   }
   .map-title .centered-school-logo {
-    width: clamp(82px, 14svh, 125px);
+    width: clamp(105px, 18svh, 160px);
     margin-bottom: 8px;
   }
   .map-title h1 {
@@ -1452,7 +1426,7 @@ dialog nav a[aria-current] {
     padding: 20px 22px 25px;
   }
   .invitation .centered-school-logo {
-    width: clamp(85px, 15svh, 130px);
+    width: clamp(105px, 18svh, 160px);
   }
   .room-world {
     padding-top: 56px;
@@ -1460,7 +1434,7 @@ dialog nav a[aria-current] {
 }
 @media (max-height: 580px) {
   .centered-school-logo {
-    width: 80px;
+    width: 105px;
     margin-bottom: 5px;
   }
   .map-title h1 {
@@ -1470,7 +1444,7 @@ dialog nav a[aria-current] {
     font-size: 19px;
   }
   .invitation .centered-school-logo {
-    width: 70px;
+    width: 90px;
   }
   .invitation {
     padding: 12px 22px;
