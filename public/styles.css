@@ -8,6 +8,32 @@
   --hand: "Caveat", "Comic Sans MS", cursive;
   --body: "Nunito", Arial, sans-serif;
 }
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 180ms;
+  animation-timing-function: ease-out;
+}
+
+::view-transition-old(root) {
+  animation-name: room-fade-out;
+}
+
+::view-transition-new(root) {
+  animation-name: room-fade-in;
+}
+
+@keyframes room-fade-out {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes room-fade-in {
+  from {
+    opacity: 0;
+  }
+}
 * {
   box-sizing: border-box;
 }

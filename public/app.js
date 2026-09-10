@@ -25,32 +25,39 @@ async function navigate(href, { replace = false, pop = false } = {}) {
     const previousPath = location.pathname;
     if (!pop)
       history[replace ? "replaceState" : "pushState"]({}, "", target.href);
-    document.querySelector("main").replaceWith(nextMain);
-    for (const selector of [".floating-locale", ".site-footer"]) {
-      document
-        .querySelector(selector)
-        ?.replaceWith(next.querySelector(selector));
-    }
-    document.body.className = next.body.className;
-    document.documentElement.lang = next.documentElement.lang;
-    document.title = next.title;
-    for (const selector of [
-      'meta[name="description"]',
-      'link[rel="alternate"]',
-    ]) {
-      document
-        .querySelector(selector)
-        ?.replaceWith(next.querySelector(selector));
-    }
-    initializePage();
-    window.scrollTo(0, 0);
-    const returnLink = [...document.querySelectorAll(".house")].find(
-      (link) => new URL(link.href, location.href).pathname === previousPath,
-    );
-    const focusTarget = returnLink || document.querySelector("h1");
-    if (focusTarget) {
-      if (!returnLink) focusTarget.setAttribute("tabindex", "-1");
-      focusTarget.focus({ preventScroll: true });
+    const swap = () => {
+      document.querySelector("main").replaceWith(nextMain);
+      for (const selector of [".floating-locale", ".site-footer"]) {
+        document
+          .querySelector(selector)
+          ?.replaceWith(next.querySelector(selector));
+      }
+      document.body.className = next.body.className;
+      document.documentElement.lang = next.documentElement.lang;
+      document.title = next.title;
+      for (const selector of [
+        'meta[name="description"]',
+        'link[rel="alternate"]',
+      ]) {
+        document
+          .querySelector(selector)
+          ?.replaceWith(next.querySelector(selector));
+      }
+      initializePage();
+      window.scrollTo(0, 0);
+      const returnLink = [...document.querySelectorAll(".house")].find(
+        (link) => new URL(link.href, location.href).pathname === previousPath,
+      );
+      const focusTarget = returnLink || document.querySelector("h1");
+      if (focusTarget && !returnLink) {
+        focusTarget.setAttribute("tabindex", "-1");
+        focusTarget.focus({ preventScroll: true });
+      }
+    };
+    if (document.startViewTransition) {
+      await document.startViewTransition(swap).finished;
+    } else {
+      swap();
     }
   } catch {
     if (version === navigationVersion) location.assign(target.href);
