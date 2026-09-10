@@ -53,3 +53,10 @@ for (const album of document.querySelectorAll("[data-paged]")) {
   prev.addEventListener("click", () => turn(-1));
   next.addEventListener("click", () => turn(1));
 }
+
+const roomBackdrop = document.querySelector(".room-world");
+roomBackdrop?.addEventListener("click", (event) => {
+  if (event.target !== roomBackdrop) return;
+  const villageLink = roomBackdrop.querySelector(".room-back");
+  if (villageLink) location.assign(villageLink.href);
+});
