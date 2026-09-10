@@ -37,7 +37,7 @@ Replace `public/assets/village.jpg` with a 1536 × 1024 drawing. Keep six houses
 
 Keep the middle clearing empty for the village title. Draw scenery without a robot. The robot has its own page. Mobile uses the same scenery with larger, readable sign buttons.
 
-Current sketch: generated with the built-in image tool. Brief: six mushroom houses around a clearing, simple colored-pencil/ink lines, paths, sparse woodland and tiny Smurfs; no text, UI, or robots. The site credits Peyo and identifies the sketch as a temporary generated asset.
+Current sketch: generated with the built-in image tool. Brief: six mushroom houses around a clearing, simple colored-pencil/ink lines, paths, sparse woodland and tiny Smurfs; no text, UI, or robots. The site credits Peyo. The original PNG for your artist is `artwork/village-sketch.png`; this is the only generated illustration currently used by the website.
 
 ## Your existing GitHub repository → Vercel
 
@@ -73,3 +73,7 @@ The generated pages pass HTML validation. `npm run check` verifies links, assets
 The supplied 2026 rubric requires CRC-server hosting for the final submission. Vercel can host the working site. Confirm the current season's rules and deadline, fill all placeholders, and freeze the submitted version at the deadline.
 
 The previous design is backed up outside this repository at `/Users/jiacai/Documents/ChatGPT/robotics-backups/before-village-redesign.tar.gz`.
+
+## School identity assets
+
+The crest is the official `logo-sainte-anne-blazon` vector from https://sainteanne.ca/wp-content/themes/csa-common/dist/sprite-B7WiA5rO.svg, without the wordmark. Manrope Bold is used for the school name and robotics label as a close match to the supplied lettering; it is not a claim that the wordmark uses this exact font. Font source: https://sainteanne.ca/wp-content/themes/csa-common/dist/fonts/Manrope-Bold.woff2.

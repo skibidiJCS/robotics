@@ -114,8 +114,6 @@ export const content = {
     mediaPlaceholder: "Pas encore de vidéo.",
     creditsText:
       "Les Schtroumpfs ont été créés par Peyo. Les personnages appartiennent à leurs ayants droit. Ce projet scolaire n’est pas affilié officiellement à la franchise.",
-    artCredit:
-      "Le croquis du village est une esquisse générée par IA pour cette maquette. Il pourra être remplacé par les dessins de l’équipe.",
     sourceCredit:
       "Source des renseignements sur la compétition : Robotique CRC.",
     mapTitle: "Où voulez-vous aller ?",
@@ -220,8 +218,6 @@ export const content = {
     mediaPlaceholder: "No video yet.",
     creditsText:
       "The Smurfs were created by Peyo. The characters belong to their respective rights holders. This school project is not officially affiliated with the franchise.",
-    artCredit:
-      "The village drawing is an AI-generated sketch for this mockup. The team can replace it with their own drawings.",
     sourceCredit: "Competition information source: CRC Robotics.",
     mapTitle: "Where are you going?",
     home: "Home",

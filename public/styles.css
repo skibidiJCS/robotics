@@ -98,16 +98,11 @@ img {
   font-weight: 600;
   margin-top: 1px;
 }
-.school-stamp {
-  font: 700 27px var(--hand);
-  border: 2px solid var(--blue);
-  border-radius: 48% 43% 46% 42%;
-  color: var(--blue);
-  width: 45px;
-  height: 45px;
-  display: grid;
-  place-items: center;
-  transform: rotate(-8deg);
+.school-crest {
+  width: 56px;
+  height: 56px;
+  object-fit: contain;
+  flex-shrink: 0;
 }
 .header-actions {
   display: flex;
@@ -248,10 +243,7 @@ img {
   color: #7d755b;
   vertical-align: middle;
 }
-.house-arrow {
-  font-size: 18px;
-  margin-left: 10px;
-}
+
 .house-caption {
   font: 18px var(--hand);
   opacity: 0;
@@ -898,11 +890,9 @@ dialog nav a[aria-current] {
   .school-brand small {
     font-size: 19px;
   }
-  .school-stamp {
-    width: 34px;
-    height: 36px;
-    min-width: 34px;
-    font-size: 23px;
+  .school-crest {
+    width: 42px;
+    height: 42px;
   }
   .header-actions {
     gap: 7px;
@@ -998,10 +988,7 @@ dialog nav a[aria-current] {
     margin-right: 2px;
     font-size: 11px;
   }
-  .house-arrow {
-    margin-left: 3px;
-    font-size: 17px;
-  }
+
   .house:hover,
   .house:focus-visible {
     transform: none;
@@ -1274,5 +1261,41 @@ dialog nav a[aria-current] {
   }
   .door-opening {
     opacity: 1;
+  }
+}
+
+@font-face {
+  font-family: SchoolManrope;
+  src: url("/assets/fonts/Manrope-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+.school-brand {
+  font-family: SchoolManrope, Arial, sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.025em;
+  text-transform: uppercase;
+  font-size: 15px;
+}
+.school-brand small {
+  font-family: SchoolManrope, Arial, sans-serif;
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.13em;
+  margin-top: 5px;
+}
+.site-footer {
+  justify-content: flex-end;
+}
+@media (max-width: 600px) {
+  .school-brand {
+    font-size: 10px;
+    max-width: 235px;
+  }
+  .school-brand small {
+    font-size: 10px;
+    letter-spacing: 0.09em;
+    margin-top: 4px;
   }
 }
