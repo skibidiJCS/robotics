@@ -1485,3 +1485,189 @@ dialog nav a[aria-current] {
     margin: 9px auto;
   }
 }
+
+/* Scale the complete village to the screen height, with forest at the sides. */
+.world {
+  background: #faf3dc;
+}
+.map-picture {
+  display: block;
+  position: absolute;
+  width: 300svh;
+  height: 100svh;
+  max-width: none;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+.map-picture .map-art {
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  object-fit: contain;
+}
+.houses {
+  display: block;
+  inset: auto;
+  width: 300svh;
+  height: 100svh;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+.house {
+  width: 12%;
+  height: 28%;
+}
+.house-0 {
+  left: 26%;
+  top: 10%;
+}
+.house-1 {
+  left: 41.5%;
+  top: 0;
+}
+.house-2 {
+  left: 59.5%;
+  top: 10%;
+}
+.house-3 {
+  left: 25%;
+  top: 55%;
+}
+.house-4 {
+  left: 42%;
+  top: 67%;
+}
+.house-5 {
+  left: 59.5%;
+  top: 52%;
+}
+.house-label {
+  font-size: clamp(19px, 3svh, 32px);
+}
+.map-title {
+  top: 47%;
+  width: min(50svh, 42vw);
+}
+.map-title .centered-school-logo {
+  width: clamp(110px, 20svh, 220px);
+  margin-bottom: 10px;
+}
+.map-title h1 {
+  font-size: clamp(28px, 4.5svh, 54px);
+}
+
+/* Portrait screens get the whole map, with the title above the drawing. */
+@media (max-aspect-ratio: 1599/1000) {
+  .map-page {
+    height: auto;
+    min-height: 100svh;
+    overflow-x: clip;
+    overflow-y: auto;
+  }
+  .world {
+    height: auto;
+    min-height: 100svh;
+    overflow: visible;
+  }
+  .village .village-canvas {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    align-content: center;
+    gap: clamp(12px, 2svh, 24px);
+    height: auto;
+    min-height: 100svh;
+    padding: max(52px, env(safe-area-inset-top)) 0
+      max(36px, env(safe-area-inset-bottom));
+  }
+  .village .map-picture,
+  .village .houses {
+    grid-area: 2 / 1;
+    position: relative;
+    inset: auto;
+    transform: none;
+    justify-self: center;
+    width: min(100%, 840px);
+    height: auto;
+    aspect-ratio: 3 / 2;
+    margin: 0;
+  }
+  .village .houses {
+    display: block;
+    align-self: stretch;
+  }
+  .village .map-title {
+    grid-area: 1 / 1;
+    position: relative;
+    inset: auto;
+    transform: none;
+    width: 100%;
+    padding: 0 40px;
+  }
+  .map-title .centered-school-logo {
+    width: clamp(80px, 14svh, 140px);
+    margin-bottom: 12px;
+  }
+  .map-title h1 {
+    font-size: clamp(28px, 6vw, 42px);
+    max-width: none;
+  }
+  .village .house {
+    position: absolute;
+    width: 26%;
+    height: 28%;
+    min-height: 44px;
+    align-items: center;
+    justify-content: flex-end;
+    border-radius: 45%;
+  }
+  .house-0 {
+    left: 8%;
+    top: 10%;
+  }
+  .house-1 {
+    left: 36%;
+    top: 0;
+  }
+  .house-2 {
+    left: 66%;
+    top: 10%;
+  }
+  .house-3 {
+    left: 6%;
+    top: 51%;
+  }
+  .house-4 {
+    left: 36%;
+    top: 64%;
+  }
+  .house-5 {
+    left: 67%;
+    top: 48%;
+  }
+  .house-label {
+    min-height: 0;
+    padding: 3px 8px 5px;
+    font-size: clamp(18px, 4.8vw, 27px);
+    white-space: nowrap;
+    line-height: 1.1;
+  }
+  .village .cinema-sign {
+    grid-area: 3 / 1;
+    position: relative;
+    inset: auto;
+    justify-self: center;
+    transform: rotate(-3deg);
+    min-height: 44px;
+    margin: 0;
+  }
+  .village .cinema-sign:hover {
+    transform: rotate(0);
+  }
+  .entrance .map-picture {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 3 / 2;
+  }
+}

@@ -37,7 +37,7 @@ Replace `public/assets/village.jpg` with a 1536 × 1024 drawing. Keep six houses
 
 Keep the middle clearing empty for the village title. Draw scenery without a robot. The robot has its own page. Mobile uses the same scenery with larger, readable sign buttons.
 
-Current sketch: generated with the built-in image tool. Brief: six mushroom houses around a clearing, simple colored-pencil/ink lines, paths, sparse woodland and tiny Smurfs; no text, UI, or robots. The site credits Peyo. The original PNG for your artist is `artwork/village-sketch.png`; this is the only generated illustration currently used by the website.
+Current sketches: generated with the built-in image tool. Six mushroom houses around a clearing, simple colored-pencil/ink lines, paths and sparse woodland; no text, UI, or robots. The site credits Peyo. The PNGs for your artist are `artwork/village-sketch.png` and `artwork/village-wide.png`. The wider version adds woodland at the sides for landscape screens; phones show the complete original drawing beneath the logo.
 
 ## Your existing GitHub repository → Vercel
 
