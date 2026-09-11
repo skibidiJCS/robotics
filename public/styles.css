@@ -1559,7 +1559,7 @@ dialog nav a[aria-current] {
 }
 
 /* Portrait screens get the whole map, with the title above the drawing. */
-@media (max-aspect-ratio: 1599/1000) {
+@media (max-aspect-ratio: 1333/1000) {
   .map-page {
     height: auto;
     min-height: 100svh;
