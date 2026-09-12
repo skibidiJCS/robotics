@@ -1,116 +1,16 @@
-import assert from "node:assert/strict";
-import { readFile, readdir, stat } from "node:fs/promises";
-import { resolve } from "node:path";
-import { runInNewContext } from "node:vm";
-import { parseHTML } from "linkedom";
-import { content, members, routes } from "../src/content.mjs";
-const root = resolve("dist");
-const files = (await readdir(root, { recursive: true })).filter((p) =>
-  p.endsWith(".html"),
-);
-assert.equal(files.length, 23);
-assert.equal(members.length, 22);
-assert.deepEqual(
-  Object.keys(content.fr).sort(),
-  Object.keys(content.en).sort(),
-);
-let checked = 0;
-for (const file of files) {
-  const html = await readFile(resolve(root, file), "utf8");
-  const { document } = parseHTML(html);
-  const lang = file.startsWith("en/") ? "en" : "fr";
-  assert.equal(document.documentElement.lang, lang);
-  assert.equal(document.querySelectorAll("h1").length, 1);
-  const ids = [...document.querySelectorAll("[id]")].map((e) => e.id);
-  assert.equal(ids.length, new Set(ids).size, `Duplicate ID: ${file}`);
-  for (const element of document.querySelectorAll("[src], [href]")) {
-    const path = element.getAttribute("src") || element.getAttribute("href");
-    if (path.startsWith("#")) {
-      assert.ok(ids.includes(path.slice(1)));
-      continue;
-    }
-    if (!path.startsWith("/")) continue;
-    let target = resolve(root, "." + path);
-    if (path.endsWith("/")) target = resolve(target, "index.html");
-    assert.ok((await stat(target)).isFile(), `${file}: ${path}`);
-    checked++;
-  }
-  for (const control of document.querySelectorAll("[aria-controls]"))
-    assert.ok(ids.includes(control.getAttribute("aria-controls")));
-  const wrong =
-    lang === "fr"
-      ? ["Knock, knock!", "Add name", "Coming soon", "Choose a house."]
-      : ["Toc, toc !", "Nom à ajouter", "À venir", "Choisissez une maison."];
-  for (const word of wrong)
-    assert.ok(!html.includes(word), `Mixed language: ${file}`);
-  if (file.includes("/village/"))
-    assert.equal(document.querySelectorAll(".house").length, 6);
-  if (file.includes("/team/"))
-    assert.equal(document.querySelectorAll(".member").length, 22);
-  const route = file.split("/").slice(1, -1).join("/");
-  if (routes.includes(route) && file !== "index.html")
-    assert.equal(
-      document.querySelector(".locale-button").getAttribute("href"),
-      `/${lang === "fr" ? "en" : "fr"}/${route ? route + "/" : ""}`,
-    );
-}
-const script = await readFile("public/app.js", "utf8");
-async function load(lang, route) {
-  const { window, document } = parseHTML(
-    await readFile(`dist/${lang}/${route}/index.html`, "utf8"),
-  );
-  let destination;
-  runInNewContext(script, {
-    document,
-    location: { assign: (path) => (destination = path) },
-    setTimeout: (fn) => fn(),
-    matchMedia: () => ({ matches: true }),
-  });
-  return { window, document, destination: () => destination };
-}
-for (const lang of ["fr", "en"]) {
-  const { document } = await load(lang, "team");
-  const visited = new Set();
-  function collect() {
-    for (const spread of document.querySelectorAll("[data-spread]"))
-      if (!spread.hidden)
-        for (const member of spread.querySelectorAll(".polaroid p"))
-          visited.add(member.textContent);
-  }
-  collect();
-  for (let i = 0; i < 5; i++) {
-    document.querySelector("[data-next]").click();
-    collect();
-  }
-  assert.equal(visited.size, 22, "All roster members must be reachable");
-  assert.ok(document.querySelector("[data-next]").disabled);
-  for (let i = 0; i < 5; i++) document.querySelector("[data-prev]").click();
-  assert.ok(document.querySelector("[data-prev]").disabled);
-  for (const route of ["robot", "journal", "media"]) {
-    const { document, window } = await load(lang, route),
-      tabs = [...document.querySelectorAll("[role=tab]")];
-    for (const tab of tabs) {
-      tab.click();
-      assert.equal(tab.getAttribute("aria-selected"), "true");
-      assert.equal(
-        [...document.querySelectorAll("[role=tabpanel]")].filter(
-          (p) => !p.hidden,
-        ).length,
-        1,
-      );
-      assert.ok(
-        !document.getElementById(tab.getAttribute("aria-controls")).hidden,
-      );
-    }
-    const event = new window.Event("keydown", { cancelable: true });
-    event.key = "Home";
-    tabs.at(-1).dispatchEvent(event);
-    assert.equal(tabs[0].getAttribute("aria-selected"), "true");
-  }
-  const entry = await load(lang, "");
-  entry.document.querySelector("[data-knock]").click();
-  assert.equal(entry.destination(), `/${lang}/village/`);
-}
-console.log(
-  `Passed: 23 pages, ${checked} local links/assets, 22 reachable members, entrance, album pagination, tabs, keyboard Home, and locale links.`,
-);
+import assert from 'node:assert/strict';
+import {readFile,readdir,stat} from 'node:fs/promises';
+import {parseHTML} from 'linkedom';
+import {renderRoom} from '../dist/village/rooms.js';
+import {createPlayer,advance,berries,touchedBerries,GROUND,WIDTH,platforms} from '../public/village/physics.js';
+const files=(await readdir('dist',{recursive:true})).filter(p=>p.endsWith('.html'));
+for(const file of files){const {document}=parseHTML(await readFile(`dist/${file}`,'utf8'));assert(document.querySelector('#world'));assert(!document.querySelector('header'));assert(!document.querySelector('footer'));const ids=[...document.querySelectorAll('[id]')].map(e=>e.id);assert.equal(ids.length,new Set(ids).size);for(const el of document.querySelectorAll('[src],[href]')){const path=el.getAttribute('src')||el.getAttribute('href');if(path.startsWith('/'))assert((await stat(`dist${path}${path.endsWith('/')?'index.html':''}`)).isFile());}}
+for(const lang of ['fr','en']){for(const route of ['about','team','game','robot','photos','journal','media','credits']){const {document}=parseHTML(renderRoom(route,lang,{page:0,tab:0}));assert.equal(document.querySelectorAll('h1').length,1,route);for(const el of document.querySelectorAll('[aria-controls]'))assert(document.getElementById(el.getAttribute('aria-controls')));}const members=new Set();for(let page=0;page<6;page++){const {document}=parseHTML(renderRoom('team',lang,{page,tab:0}));for(const name of document.querySelectorAll('.member h2'))members.add(name.textContent);}assert.equal(members.size,22);}
+const player=createPlayer();let collected=[];
+for(const b of berries){let steps=0;while(!collected.includes(b.id)&&steps++<1500){const dx=b.x-player.x;advance(player,{left:dx<-3,right:dx>3,jump:player.grounded&&Math.abs(dx)<110},1/120);collected.push(...touchedBerries(player,collected));}assert(collected.includes(b.id),`Berry ${b.id} must be reachable`);}
+assert.equal(collected.length,12);assert.equal(touchedBerries(player,collected).length,0);
+const falling=createPlayer(platforms[0].x+50);falling.y=platforms[0].y-20;falling.grounded=false;for(let i=0;i<100;i++)advance(falling,{},1/120);assert.equal(falling.y,platforms[0].y);const jumping=createPlayer();advance(jumping,{jump:true},1/60);const velocity=jumping.vy;advance(jumping,{jump:true},1/60);assert(jumping.vy>velocity,'No double jump');const edge=createPlayer(WIDTH-36);for(let i=0;i<120;i++)advance(edge,{right:true},1/120);assert(edge.x<=WIDTH-35);assert.equal(edge.y,GROUND);
+console.log(`Passed: ${files.length} full-screen entry points, 8 integrated sections in both languages, all 22 team members, all 12 reachable berries, platforms, jump limits and world boundaries.`);
+const normal=createPlayer(),fast=createPlayer();for(let i=0;i<240;i++){advance(normal,{right:true},1/120);advance(fast,{right:true,fast:true},1/120);}assert(fast.x-400>(normal.x-400)*1.8,'Run control must increase speed');
+const {walkPose}=await import('../public/village/physics.js');assert(walkPose(20,true).front.x<walkPose(5,true).front.x,'Planted foot travels backward while body moves forward');assert(walkPose(57,true).front.y<-5,'Swing foot lifts off the ground');
+const runner=createPlayer();let picked=[];for(const b of berries){let steps=0;while(!picked.includes(b.id)&&steps++<1800){const dx=b.x-runner.x;advance(runner,{left:dx<-3,right:dx>3,fast:true,jump:runner.grounded&&Math.abs(dx)<205},1/120);picked.push(...touchedBerries(runner,picked));}assert(picked.includes(b.id),`Berry ${b.id} must be reachable while running`);}console.log('Passed: double-speed movement, directional walk cycle, and all berries reachable while running.');
