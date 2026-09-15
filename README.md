@@ -12,10 +12,11 @@ Preview: http://127.0.0.1:4173.
 ## Controls
 
 - Left/right arrows, A/D or Q/D: walk.
+- When opposite directions are held, the most recently pressed direction wins. Releasing movement stops immediately.
 - Space or up arrow: jump.
 - E near a house: enter. Clicking a house walks there and enters automatically.
 - Escape: open the map, or return from a room.
-- On touchscreens: hold the left/right buttons to move and tap the jump button. You can also tap the ground to walk or the sky to jump. Tap the Smurf to open the map.
+- On touchscreens: slide and hold the thumb control to move, and tap Sauter / Jump to jump. You can also tap the ground to walk or the sky to jump. Tap the Smurf to open the map.
 - Click or tap ×1 beside the Smurf to switch to ×2 speed; tap again to walk.
 
 The map provides direct access to every section and language switching. Collect the twelve purple berries for the village picnic. Berry collecting is optional; all website content remains accessible. The map also resets the harvest. Position, language and collected berries are saved on this device.
@@ -27,6 +28,7 @@ The new rooms include About, Team, Competition, Robot, Photos, Journal, Video/Tu
 - `src/content.mjs`: both languages, the 22 team member slots and the team's content.
 - `public/village/rooms.js`: room layouts, album pagination and tabs.
 - `public/village/physics.js`: movement, jumping, platforms and collectible locations.
+- `public/village/input.js`: independent keyboard and touch movement state.
 - `public/village/art.js`: canvas drawings of the village and Smurf.
 - `public/village/game.js`: camera, controls, transitions, navigation and progress.
 - `public/village/style.css`: house signs, room layouts and responsive controls.

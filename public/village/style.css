@@ -3,7 +3,11 @@
 #speed{position:absolute;transform:translate(-50%,-50%);min-width:44px;min-height:44px;padding:6px;background:#f5efdbdd;border:1px solid #93a686;border-radius:50%;color:#52715c;font:700 13px Manrope,Arial;touch-action:manipulation}
 #speed[aria-pressed=true]{background:#567e65;color:#fbf8e9;border-color:#45684f}
 #touch-controls{display:none;position:absolute;left:max(20px,env(safe-area-inset-left));right:max(20px,env(safe-area-inset-right));bottom:max(19px,env(safe-area-inset-bottom));align-items:center;justify-content:space-between;pointer-events:none}
-#touch-controls>div{display:flex;gap:12px}
-#touch-controls button{pointer-events:auto;touch-action:none;width:48px;height:48px;border:1px solid #8ba07bd9;border-radius:50%;background:#f7f1dcd9;color:#506b4d;font:25px Arial;user-select:none;-webkit-user-select:none}
-#touch-controls button:active{background:#afc494}
-@media(pointer:coarse),(max-width:700px){#touch-controls{display:flex}#speed{width:44px;height:44px}}
+#touch-controls button{pointer-events:auto;touch-action:none;min-height:48px;border:1px solid #8ba07b80;background:#f7f1dccc;color:#435447;font:700 12px Manrope,Arial;user-select:none;-webkit-user-select:none}
+#joystick{position:relative;width:100px;height:56px;border-radius:30px;padding:0;box-shadow:inset 0 1px 3px #526b4d10}
+#joystick:before{content:'';position:absolute;left:20px;right:20px;top:27px;height:1px;background:#8ba07b50}
+#joystick span{position:absolute;left:31px;top:8px;width:38px;height:38px;border-radius:50%;background:#718a65;border:1px solid #59754f;box-shadow:0 2px 3px #526b4d20;transform:translateX(var(--thumb,0px));pointer-events:none}
+#touch-jump{border-radius:26px;padding:0 22px;min-width:84px}
+#touch-jump:active{background:#d7dfc1;transform:translateY(1px)}
+@media(pointer:coarse),(max-width:700px){#touch-controls{display:flex}#speed{width:44px;height:44px;left:50%!important;top:auto!important;bottom:calc(max(19px,env(safe-area-inset-bottom)) + 6px);transform:translateX(-50%)}#nearby{display:none}.door{min-height:44px}}
+@media(max-height:500px){#touch-controls{bottom:max(10px,env(safe-area-inset-bottom))}#speed{bottom:calc(max(10px,env(safe-area-inset-bottom)) + 6px)}#first-hint{font-size:10px;padding:6px 10px}}

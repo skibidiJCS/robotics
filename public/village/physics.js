@@ -6,7 +6,9 @@ export function createPlayer(x=400){return {x,y:GROUND,vx:0,vy:0,grounded:true,f
 export function jump(p){if(p.grounded){p.vy=-770;p.grounded=false;return true;}return false;}
 export function advance(p,input,dt){
  const desired=(input.left?-1:0)+(input.right?1:0),target=desired*(input.fast?530:265),accel=(input.fast?2800:1900)*dt;
- p.vx+=Math.sign(target-p.vx)*Math.min(Math.abs(target-p.vx),accel);if(input.jump)jump(p);
+ if(!desired)p.vx=0;
+ else {if(Math.sign(p.vx)!==desired)p.vx=0;p.vx+=Math.sign(target-p.vx)*Math.min(Math.abs(target-p.vx),accel);p.facing=desired;}
+ if(input.jump)jump(p);
  p.x=Math.max(35,Math.min(WIDTH-35,p.x+p.vx*dt));if(p.x===35||p.x===WIDTH-35)p.vx=0;if(Math.abs(p.vx)>3){p.facing=p.vx>0?1:-1;p.walk+=Math.abs(p.vx)*dt;}
  const previous=p.y;p.vy+=1900*dt;p.y+=p.vy*dt;p.grounded=false;
  if(p.vy>=0){for(const platform of platforms){if(p.x>platform.x-12&&p.x<platform.x+platform.w+12&&previous<=platform.y+.1&&p.y>=platform.y){p.y=platform.y;p.vy=0;p.grounded=true;break;}}}
@@ -15,8 +17,8 @@ export function advance(p,input,dt){
 export function touchedBerries(p,collected){return berries.filter(b=>!collected.includes(b.id)&&Math.hypot(p.x-b.x,p.y-38-b.y)<33).map(b=>b.id);}
 
 export function walkPose(distance,moving){
- if(!moving)return {front:{x:7,y:-5},back:{x:-9,y:-5}};
- const phase=(distance/72)%1;
- function foot(t){t%=1;if(t<.6)return {x:12-24*t/.6,y:-5};const swing=(t-.6)/.4;return {x:-12+24*swing,y:-5-Math.sin(swing*Math.PI)*10};}
+ if(!moving)return {front:{x:2,y:-6},back:{x:-4,y:-6}};
+ const phase=(distance/110)%1;
+ function foot(t){t%=1;if(t<.5)return {x:11-22*t/.5,y:-6};const swing=(t-.5)/.5;return {x:-11+22*swing,y:-6-Math.sin(swing*Math.PI)*8};}
  return {front:foot(phase),back:foot(phase+.5)};
 }
