@@ -1,13 +1,22 @@
-/* Flexible canvas village: the original circular layout, recoloured with the game's palette. */
-.map-page{background:#a9c69a;overflow:hidden}
-.world{background:#a9c69a}
-.village-canvas{position:relative}
-.map-picture{display:block;position:absolute;inset:0;width:100%;height:100%;max-width:none;transform:none;object-fit:fill;z-index:0}
-.map-picture .map-art{display:none}
-.houses{z-index:2}
-.house{transition:transform .2s ease,filter .2s ease}
-.house:hover,.house:focus-visible{filter:brightness(1.06) saturate(1.1);transform:translate(-50%,-4px) rotate(0deg)}
-.house:hover .house-label,.house:focus-visible .house-label{box-shadow:2px 5px #4e5e3b44;transform:translateY(-3px) rotate(0deg)}
-.map-title{z-index:3}
-.map-title .centered-school-logo{filter:none}
-@media(max-aspect-ratio:1333/1000){.village .village-canvas{position:relative;display:block;height:100svh;min-height:100svh;padding:0}.village .map-picture,.village .houses{position:absolute;inset:0;width:100%;height:100%;margin:0;transform:none}.village .map-title{position:absolute;top:14%;left:50%;transform:translateX(-50%);z-index:3;width:62%}.village .map-title .centered-school-logo{width:110px;height:110px;margin-inline:auto}.village .house{position:absolute}.village .cinema-sign{position:absolute;z-index:4}}
+body.village-page{display:block;background:#bad397;overflow:hidden}
+.village-scene{position:relative;isolation:isolate;width:100%;height:100dvh;min-height:480px;overflow:hidden}
+.village-scenery{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.village-houses{position:absolute;inset:0}
+.village-house{position:absolute;left:var(--x);top:var(--y);width:clamp(130px,19vw,310px);height:auto;transform:translate(-50%,-50%);display:flex;align-items:center;flex-direction:column;border:0;touch-action:manipulation}
+.village-house-0{--x:21%;--y:23%}.village-house-1{--x:49%;--y:17%}.village-house-2{--x:79%;--y:23%}.village-house-3{--x:20%;--y:69%}.village-house-4{--x:50%;--y:82%}.village-house-5{--x:79%;--y:65%}
+.house-art{width:100%;height:auto;display:block;overflow:visible;transform-origin:50% 90%;transform:translateX(var(--shift,0px)) rotate(var(--lean,0deg));transition:transform .18s ease,filter .18s ease}
+.village-house:hover .house-art,.village-house:focus-visible .house-art{filter:brightness(1.045);transform:translate(var(--shift,0px),-4px) rotate(var(--lean,0deg))}
+.village-label,.village-cinema{font:800 clamp(12px,1.1vw,17px)/1.2 Nunito,Arial,sans-serif;color:#674628;background:#f8e7be;border:2px solid #947347;border-radius:7px;box-shadow:0 3px #947347;padding:6px 14px;white-space:nowrap}
+.village-label{margin-top:-4px;z-index:1}.village-house:focus-visible .village-label{outline:3px solid #267b9f;outline-offset:4px}
+.village-brand{position:absolute;left:50%;top:45%;transform:translate(-50%,-50%);width:35%;text-align:center;pointer-events:none;z-index:2}
+.village-brand img{width:clamp(100px,12vw,168px);height:auto;margin:0 auto 10px;max-height:19vh}
+.village-brand h1{font:800 clamp(22px,2.5vw,39px)/1.08 Nunito,Arial,sans-serif;color:#285e4b;text-shadow:0 2px #edf1c5}
+.village-cinema{position:absolute;left:3%;bottom:4%;transform:rotate(-3deg)}
+.village-page .site-footer{position:fixed;bottom:6px;right:14px;padding:0;min-height:0;font-size:10px;z-index:3}
+.placeholder-room{display:grid;place-items:center;min-height:280px}.placeholder-room h1{font:700 32px Nunito,Arial,sans-serif}.placeholder-room .room-back{position:absolute;top:15px;left:20px}
+@media(max-width:700px){.village-scene{min-height:620px}.village-house{width:clamp(112px,28vw,190px)}.village-house-0{--x:18%;--y:29%}.village-house-1{--x:50%;--y:13%}.village-house-2{--x:82%;--y:29%}.village-house-3{--x:18%;--y:66%}.village-house-4{--x:50%;--y:83%}.village-house-5{--x:82%;--y:66%}.village-brand{top:47%;width:58%}.village-brand img{width:105px;max-height:17vh}.village-brand h1{font-size:23px}.village-label{font-size:12px;padding:5px 9px}.village-cinema{font-size:12px;bottom:3%;left:4%}}
+@media(max-height:650px) and (min-width:701px){.village-scene{min-height:360px}.village-house{width:min(20vw,30vh)}.village-brand img{width:90px;max-height:20vh}.village-brand h1{font-size:24px}.village-label{font-size:12px;padding:4px 8px}}
+@media(max-width:700px) and (max-height:620px){body.village-page{overflow:auto}}
+@media(prefers-reduced-motion:reduce){.house-art{transition:none!important;transform:none!important}}
+
+.mobile-scenery{display:none}@media(max-width:700px){.desktop-scenery{display:none}.mobile-scenery{display:block}}

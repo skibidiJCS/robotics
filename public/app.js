@@ -45,7 +45,7 @@ async function navigate(href, { replace = false, pop = false } = {}) {
       }
       initializePage();
       window.scrollTo(0, 0);
-      const returnLink = [...document.querySelectorAll(".house")].find(
+      const returnLink = [...document.querySelectorAll(".village-house")].find(
         (link) => new URL(link.href, location.href).pathname === previousPath,
       );
       const focusTarget = returnLink || document.querySelector("h1");
@@ -65,7 +65,7 @@ async function navigate(href, { replace = false, pop = false } = {}) {
 }
 
 function initializePage() {
-  if(document.querySelector('#village-art'))import('/village/original-hub.js').then(m=>m.renderOriginalHub());
+  if(document.querySelector('.village-scene'))import('/village/original-hub.js').then(m=>m.renderOriginalHub());
   const knock = document.querySelector("[data-knock]");
   knock?.addEventListener("click", (event) => {
     if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey)
