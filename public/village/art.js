@@ -37,13 +37,13 @@ function arm(c,x,y,swing,fill){line(c,[[x,y],[x+swing*.55,y+10],[x+swing,y+18]],
 export function drawSmurf(c,p,time){c.save();c.translate(p.x,p.y);c.scale(p.facing*.88,.88);const run=Math.abs(p.vx)>10&&p.grounded,pose=walkPose(p.walk,run),swing=run?Math.cos(p.walk/110*Math.PI*2)*9:0,bob=run?-Math.abs(Math.sin(p.walk/110*Math.PI*2))*1.5:0;
  if(!p.grounded){pose.front={x:7,y:-12};pose.back={x:-7,y:-8};}
  oval(c,0,3,23,5,'#60784f22',null);
- leg(c,[-2,-22+bob],pose.back,'#d8e1cf');
+ leg(c,[-2,-22+bob],pose.back,(p.hero?'#a33c34':'#d8e1cf'));
  arm(c,4,-45+bob,swing,'#70aebf');
- leg(c,[1,-22+bob],pose.front,'#f8f5e7');
+ leg(c,[1,-22+bob],pose.front,(p.hero?'#bf4c40':'#f8f5e7'));
  c.translate(0,bob);
- path(c,c=>{c.moveTo(-10,-30);c.lineTo(-9,-18);c.quadraticCurveTo(0,-15,11,-20);c.lineTo(11,-30);c.closePath();},'#f8f5e7',ink,1.5);
+ path(c,c=>{c.moveTo(-10,-30);c.lineTo(-9,-18);c.quadraticCurveTo(0,-15,11,-20);c.lineTo(11,-30);c.closePath();},(p.hero?'#bf4c40':'#f8f5e7'),ink,1.5);
  path(c,c=>{c.moveTo(-6,-49);c.bezierCurveTo(-12,-43,-12,-32,-9,-28);c.quadraticCurveTo(0,-24,12,-29);c.quadraticCurveTo(15,-38,6,-49);c.closePath();},'#7cb9ca',ink,1.7);
  arm(c,-3,-43,-swing,'#8ac2d0');
  oval(c,-16,-57,5,7,'#87bfce',ink,1.4);oval(c,0,-58,18,20,'#8bc5d5',ink,1.7);oval(c,17,-52,10,6,'#8bc5d5',ink,1.4);
  const blink=time%5>.1;oval(c,4,-60,4,blink?6:1,'#fff9e9',ink,1);oval(c,12,-60,3.5,blink?5:1,'#fff9e9',ink,1);if(blink){oval(c,6,-60,1.4,2.6,'#526d72',null);oval(c,13,-60,1.3,2.5,'#526d72',null);}path(c,c=>{c.moveTo(2,-44);c.quadraticCurveTo(9,-39,15,-44);},null,ink,1.2);
- path(c,c=>{c.moveTo(-19,-67);c.bezierCurveTo(-20,-92,5,-110,22,-91);c.bezierCurveTo(34,-77,18,-73,15,-80);c.quadraticCurveTo(17,-73,20,-66);c.quadraticCurveTo(1,-71,-19,-67);},'#f8f5e7',ink,1.7);path(c,c=>{c.moveTo(-19,-68);c.quadraticCurveTo(0,-75,20,-67);c.lineTo(19,-62);c.quadraticCurveTo(0,-68,-18,-62);c.closePath();},'#f8f5e7',ink,1.4);c.restore();}
+ path(c,c=>{c.moveTo(-19,-67);c.bezierCurveTo(-20,-92,5,-110,22,-91);c.bezierCurveTo(34,-77,18,-73,15,-80);c.quadraticCurveTo(17,-73,20,-66);c.quadraticCurveTo(1,-71,-19,-67);},(p.hero?'#bf4c40':'#f8f5e7'),ink,1.7);path(c,c=>{c.moveTo(-19,-68);c.quadraticCurveTo(0,-75,20,-67);c.lineTo(19,-62);c.quadraticCurveTo(0,-68,-18,-62);c.closePath();},(p.hero?'#bf4c40':'#f8f5e7'),ink,1.4);c.restore();}

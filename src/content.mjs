@@ -59,7 +59,7 @@ export const content = {
     stamp: "SA",
     aboutHeading: "Pourquoi des Schtroumpfs ?",
     aboutText:
-      "Un village où chacun a sa spécialité : c’est le point de départ de notre thème. Les maisons, les carnets et les albums de ce site reprennent cet univers.",
+      "Notre site reprend le village et les personnages des Schtroumpfs.",
     schoolHeading: "Notre école",
     schoolText: "Collège Sainte-Anne de Lachine",
     schoolNote: "L’équipe de robotique · 22 membres à présenter.",
@@ -77,8 +77,8 @@ export const content = {
     page: "Page",
     of: "sur",
     teamNote: "Les enseignants et les mentors seront ajoutés à la liste.",
-    gameTitle: "Les règles ne sont\npas encore arrivées.",
-    gameText: "On leur garde une place ici.",
+    gameTitle: "Règles de la compétition",
+    gameText: "À venir.",
     gameList: [
       "Objectif du jeu",
       "Terrain et pièces",
@@ -91,9 +91,9 @@ export const content = {
       "Dessins, essais et modifications.",
       "Le robot tel qu’il sera présenté à la compétition.",
     ],
-    robotPhoto: "Notre robot sera ici.",
+    robotPhoto: "Photo du robot à venir.",
     photoTabs: ["Les débuts", "À l’atelier", "Le robot"],
-    photoNote: "Les vraies photos de l’équipe arrivent bientôt.",
+    photoNote: "Photos à venir.",
     journalTabs: [
       "Conception",
       "Construction",
@@ -108,7 +108,7 @@ export const content = {
     journalNote: "Aucune entrée pour le moment.",
     mediaTabs: ["Vidéo de l’équipe", "Tutoriel"],
     mediaNotes: [
-      "Notre aventure, racontée par l’équipe.",
+      "Vidéo de l’équipe.",
       "Une technique de l’atelier, expliquée pas à pas.",
     ],
     mediaPlaceholder: "Pas encore de vidéo.",
@@ -163,7 +163,7 @@ export const content = {
     stamp: "SA",
     aboutHeading: "Why the Smurfs?",
     aboutText:
-      "A village where everyone has their own specialty: that’s where our theme begins. The houses, notebooks, and albums on this site belong to that world.",
+      "Our site uses the Smurf village and characters.",
     schoolHeading: "Our school",
     schoolText: "Collège Sainte-Anne de Lachine",
     schoolNote: "The robotics team · 22 members to introduce.",
@@ -181,8 +181,8 @@ export const content = {
     page: "Page",
     of: "of",
     teamNote: "Teachers and mentors will also be added to the roster.",
-    gameTitle: "The rules haven’t\narrived yet.",
-    gameText: "We’re saving them a spot here.",
+    gameTitle: "Competition rules",
+    gameText: "Coming soon.",
     gameList: [
       "Game objective",
       "Field and pieces",
@@ -195,9 +195,9 @@ export const content = {
       "Drawings, tests, and changes.",
       "The robot as it will appear at the competition.",
     ],
-    robotPhoto: "Our robot goes here.",
+    robotPhoto: "Robot photo coming soon.",
     photoTabs: ["The beginning", "In the workshop", "The robot"],
-    photoNote: "The team’s real photos are on their way.",
+    photoNote: "Photos coming soon.",
     journalTabs: [
       "Design",
       "Construction",

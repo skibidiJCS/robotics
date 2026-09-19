@@ -1,48 +1,44 @@
-# Sainte-Anne — Le village
+# Sainte-Anne — Smurf village
 
-A full-screen Smurf platform game that also serves as the robotics website. Walk through the village, jump onto platforms, collect twelve berries and enter its mushroom houses. There is no header, footer or separate old website.
+A bilingual robotics website with a circular village of clickable mushroom houses and a separate timed chase game.
+
+## Local preview
 
 ```sh
-npm install
+npm ci
 npm run dev
 ```
 
-Preview: http://127.0.0.1:4173.
+Village: http://127.0.0.1:4312/en/village/
+Game: http://127.0.0.1:4312/en/play/
 
-## Controls
+Move with WASD, ZQSD, arrows, click-to-walk or the touch joystick. Rescuing a Smurf adds 100 points and four seconds. Blue mushrooms give a short speed boost; gold mushrooms give a shield. Escape pauses the game. The difficulty button starts a new run in the selected mode.
 
-- Left/right arrows, A/D or Q/D: walk.
-- When opposite directions are held, the most recently pressed direction wins. Releasing movement stops immediately.
-- Space or up arrow: jump.
-- E near a house: enter. Clicking a house walks there and enters automatically.
-- Escape: open the map, or return from a room.
-- On touchscreens: slide and hold the thumb control to move, and tap Sauter / Jump to jump. You can also tap the ground to walk or the sky to jump. Tap the Smurf to open the map.
-- Click or tap ×1 beside the Smurf to switch to ×2 speed; tap again to walk.
+Hard mode has two cats: one pursues, the other anticipates movement and flanks. Cats accelerate with elapsed time and score, capped at 335 units/second; boosted movement is 400. Mushroom pickups return after a cooldown. Only hard-mode scores can enter the shared leaderboard; inappropriate usernames become Player.
 
-The map provides direct access to every section and language switching. Collect the twelve purple berries for the village picnic. Berry collecting is optional; all website content remains accessible. The map also resets the harvest. Position, language and collected berries are saved on this device.
-
-## Content
-
-The new rooms include About, Team, Competition, Robot, Photos, Journal, Video/Tutorial and Credits. All rooms open inside the same page with transitions. Original section URLs remain usable and open the corresponding new room.
-
-- `src/content.mjs`: both languages, the 22 team member slots and the team's content.
-- `public/village/rooms.js`: room layouts, album pagination and tabs.
-- `public/village/physics.js`: movement, jumping, platforms and collectible locations.
-- `public/village/input.js`: independent keyboard and touch movement state.
-- `public/village/art.js`: canvas drawings of the village and Smurf.
-- `public/village/game.js`: camera, controls, transitions, navigation and progress.
-- `public/village/style.css`: house signs, room layouts and responsive controls.
-- `scripts/build.mjs`: static build, content module and compatible URLs.
-
-The team photos, member details, robot information and competition material remain pending where the source content is unfilled. The berry game is separate from CRC competition rules.
-
-## Verify
+## Checks
 
 ```sh
 npm run build
 npm run check
 ```
 
-Checks cover the full-screen entry points, eight sections in both languages, all 22 team slots, all twelve reachable berries, platform landings, jump limits and world boundaries. Browser testing covered gameplay, house entry, in-page navigation, team pagination, tabs, language switching, saved progress, mobile interaction, transitions and browser history.
+Checks cover movement, pursuit, separation, speed limits, escape with a boost, pickup reachability, username filtering, hard-only scores, concurrent storage writes, and bilingual routes.
 
-Nothing was committed, pushed or deployed for this replacement.
+## Vercel
+
+The existing `robotics` project deploys `main` from `skibidiJCS/robotics` to https://csarobotics.vercel.app.
+
+The `api/leaderboard.js` Vercel Function stores scores in private Vercel Blob storage. Connect the `robotics-leaderboard` store to Production and Preview. Vercel supplies `BLOB_STORE_ID` and `VERCEL_OIDC_TOKEN`; never put credentials in browser code. Conditional writes preserve simultaneous score submissions. Local development uses `.data/leaderboard.json`, which is ignored by Git. Production does not use a temporary local file for persistence.
+
+## Source
+
+- `src/content.mjs`: French and English content.
+- `scripts/build-website.mjs`: website pages and house navigation.
+- `public/village/hub.js`, `hub.css`: circular village using the game's artwork.
+- `public/village/roam-state.js`: chase and pickup rules.
+- `public/village/game.js`, `roam.css`: game display and controls.
+- `scripts/leaderboard.mjs`: name filtering and local score storage.
+- `scripts/cloud-leaderboard.mjs`: persistent Vercel score storage.
+
+The remaining team, robot and competition placeholders should be filled in `src/content.mjs`.

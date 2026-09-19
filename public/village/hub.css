@@ -1,0 +1,24 @@
+/* The village uses the same painted houses, colours and signs as the game. */
+body.map-page{background:#adc69b;color:#435847;overflow-x:hidden}
+.world{padding:0;min-height:100dvh;display:grid;place-items:center;background:#adc69b}
+.world:before,.world:after{display:none}
+.world .village-canvas{position:relative;inset:auto;transform:none;width:min(1320px,100%);height:min(940px,100dvh);min-height:660px;aspect-ratio:auto;margin:auto;overflow:hidden}
+#village-ground{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.world .houses{position:absolute;inset:0;display:block;transform:none;padding:0;margin:0}
+.world .house{position:absolute;display:block;width:24%;height:30%;max-width:none;min-width:0;min-height:44px;padding:0;border:0;background:none;box-shadow:none;transform:translate(-50%,-50%);text-decoration:none}
+.house-art{display:block;width:100%;height:100%;object-fit:contain;transition:transform .18s}
+.world .house:hover{transform:translate(-50%,-50%);background:none}.house:hover .house-art{transform:translateY(-5px)}
+.world .house-0{left:18%;top:28%}.world .house-1{left:50%;top:16%}.world .house-2{left:82%;top:28%}.world .house-3{left:18%;top:69%}.world .house-4{left:50%;top:83%}.world .house-5{left:82%;top:69%}
+.world .house-label{position:absolute;top:auto;bottom:0;left:50%;transform:translateX(-50%) rotate(-2deg);white-space:nowrap;padding:9px 15px;background:#dfc18a;border:2px solid #745537;border-radius:8px 6px 9px 5px;box-shadow:0 3px #745537;color:#5b402a;font:700 14px Manrope,Arial;min-height:39px;display:grid;place-items:center}
+.world .map-title{position:absolute;inset:auto;left:50%;top:48%;transform:translate(-50%,-50%);width:28%;padding:0;text-align:center;pointer-events:none}
+.world .map-title .centered-school-logo{display:block;width:68px;height:77px;object-fit:contain;margin:0 auto 10px;filter:none}
+.world .map-title h1{margin:0;color:#245e76;font:700 clamp(18px,2.4vw,30px)/1.2 Manrope,Arial;text-shadow:0 1px #e3efcb;letter-spacing:-.8px}
+.map-title .knock-button{pointer-events:auto;display:inline-block;margin-top:15px;padding:10px 18px;font:700 13px Manrope,Arial;background:#2c87ac;color:#fff3d2;border:2px solid #235b74;border-radius:9px;box-shadow:0 3px #235b74;white-space:normal}
+.entrance .houses{opacity:.7}.entrance .map-title{background:#fae9c4;border:3px solid #775435;border-radius:22px;padding:22px;pointer-events:auto;box-shadow:0 5px #775435}
+.world .cinema-sign{position:absolute;inset:auto auto 22px 25px;transform:rotate(-2deg);font:700 13px Manrope,Arial;background:#dfc18a;border:2px solid #745537;color:#5b402a;border-radius:7px;box-shadow:0 3px #745537;padding:10px 15px;min-height:44px}
+.floating-locale{background:#dfc18a;border:2px solid #745537;color:#5b402a;border-radius:7px;box-shadow:0 3px #745537;font-family:Manrope,Arial;z-index:4}
+.site-footer{z-index:4}.room-world{background:#adc69b}.room{background:#fae9c4;border:3px solid #775435;box-shadow:0 6px #775435;border-radius:22px}.room h1{color:#245e76;font-family:Manrope,Arial}
+@media(max-width:650px){.world .village-canvas{height:100dvh;min-height:650px}.world .house{width:36%;height:25%}.world .house-0{left:18%;top:30%}.world .house-1{left:50%;top:14%}.world .house-2{left:82%;top:30%}.world .house-3{left:18%;top:66%}.world .house-4{left:50%;top:81%}.world .house-5{left:82%;top:66%}.world .house-label{font-size:11px;padding:8px 10px;min-height:38px}.world .map-title{width:44%;top:30px!important}.world .map-title .centered-school-logo{width:44px;height:51px;margin-bottom:8px}.world .map-title h1{font-size:18px}.world .cinema-sign{left:15px;bottom:24px;font-size:11px}.entrance .map-title{padding:14px;width:52%}.entrance .map-title .centered-school-logo{display:none}}
+@media(prefers-reduced-motion:reduce){.house-art{transition:none}}
+.world .houses{width:100%;height:100%;max-width:none;max-height:none;aspect-ratio:auto}
+.world .house-label{right:auto;width:max-content;max-width:none}

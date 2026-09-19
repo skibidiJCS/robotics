@@ -13,5 +13,8 @@
   },
   "devDependencies": {
     "linkedom": "^0.18.13"
+  },
+  "dependencies": {
+    "@vercel/blob": "^2.8.0"
   }
 }

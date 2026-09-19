@@ -1,0 +1,1673 @@
+@import url("https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&display=swap");
+:root {
+  --paper: #f5f0dc;
+  --ink: #313f30;
+  --blue: #356d98;
+  --red: #b84e39;
+  --line: #68745945;
+  --hand: "Caveat", "Comic Sans MS", cursive;
+  --body: "Nunito", Arial, sans-serif;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 180ms;
+  animation-timing-function: ease-out;
+}
+
+::view-transition-old(root) {
+  animation-name: room-fade-out;
+}
+
+::view-transition-new(root) {
+  animation-name: room-fade-in;
+}
+
+@keyframes room-fade-out {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes room-fade-in {
+  from {
+    opacity: 0;
+  }
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font: 16px/1.55 var(--body);
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+button {
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+button {
+  touch-action: manipulation;
+}
+a:focus-visible,
+button:focus-visible,
+[tabindex]:focus-visible {
+  outline: none;
+}
+h1,
+h2,
+h3,
+p,
+figure {
+  margin: 0;
+}
+h1,
+h2,
+h3 {
+  font-family: var(--hand);
+  line-height: 1.08;
+  font-weight: 600;
+}
+h1 {
+  font-size: 64px;
+}
+h2 {
+  font-size: 36px;
+}
+svg {
+  width: 25px;
+  height: 25px;
+}
+img {
+  max-width: 100%;
+  display: block;
+}
+.site-header {
+  height: 78px;
+  flex-shrink: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 35px;
+  position: relative;
+  z-index: 3;
+  background: var(--paper);
+  border-bottom: 1px solid #65735424;
+}
+.school-brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.35;
+}
+.school-brand small {
+  display: block;
+  color: var(--blue);
+  font-family: var(--hand);
+  font-size: 22px;
+  font-weight: 600;
+  margin-top: 1px;
+}
+.school-crest {
+  width: 56px;
+  height: 56px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+.map-button,
+.locale-button {
+  background: none;
+  border: none;
+  font: 600 24px var(--hand);
+  padding: 5px 8px;
+}
+.map-button:hover,
+.locale-button:hover {
+  color: var(--red);
+}
+.map-button span {
+  display: inline-block;
+  margin-left: 6px;
+  font: 26px var(--body);
+}
+.locale-button {
+  font: 800 14px var(--body);
+  border-left: 1px solid var(--line);
+  padding-left: 23px;
+}
+.site-footer {
+  min-height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 8px 35px;
+  font-size: 11px;
+  color: #636a53;
+  margin-top: auto;
+}
+.site-footer a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.world {
+  display: grid;
+  place-items: center;
+  flex: 1;
+  min-height: 0;
+  padding: 0 16px;
+}
+.village-canvas {
+  position: relative;
+  width: min(100%, calc((100svh - 114px) * 1.5));
+  aspect-ratio: 3/2;
+  isolation: isolate;
+}
+.map-art {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  mix-blend-mode: multiply;
+  user-select: none;
+  pointer-events: none;
+}
+.map-title {
+  position: absolute;
+  top: 39%;
+  left: 50%;
+  transform: translateX(-50%) rotate(-3deg);
+  width: 44%;
+  text-align: center;
+  pointer-events: none;
+}
+.map-title h1 {
+  font-size: clamp(26px, 4vw, 56px);
+  line-height: 0.95;
+  color: #2e5b42;
+  text-shadow: 0 1px #fdf4d7;
+}
+.map-title p {
+  font: 24px var(--hand);
+  margin-top: 11px;
+}
+.house {
+  position: absolute;
+  width: 23%;
+  height: 28%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  flex-direction: column;
+  border-radius: 45%;
+  transition: transform 0.2s;
+}
+.house-0 {
+  left: 9%;
+  top: 8%;
+}
+.house-1 {
+  left: 38%;
+  top: 0;
+}
+.house-2 {
+  left: 69%;
+  top: 8%;
+}
+.house-3 {
+  left: 9%;
+  top: 50%;
+}
+.house-4 {
+  left: 39%;
+  top: 63%;
+}
+.house-5 {
+  left: 68%;
+  top: 45%;
+}
+.house-label {
+  background: #fff6dbef;
+  padding: 2px 14px 5px;
+  border: 1.5px solid #6a654e;
+  box-shadow: 2px 3px 0 #584f2f35;
+  font: 600 clamp(18px, 2vw, 28px) var(--hand);
+  line-height: 1.1;
+  white-space: nowrap;
+  transform: rotate(-3deg);
+  border-radius: 3px 8px 3px 5px;
+  transition:
+    transform 0.2s,
+    background 0.2s;
+}
+.house:nth-child(even) .house-label {
+  transform: rotate(3deg);
+}
+
+.house:hover,
+.house:focus-visible {
+  z-index: 2;
+  transform: translateY(-5px);
+}
+.house:hover .house-label,
+.house:focus-visible .house-label {
+  background: #fffef3;
+  transform: rotate(0) scale(1.08);
+}
+
+.cinema-sign {
+  position: absolute;
+  left: 4%;
+  bottom: 4%;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font: 600 22px var(--hand);
+  background: #f9f1d7;
+  transform: rotate(-5deg);
+  padding: 7px 12px;
+  border: 1px solid #6d735a;
+  box-shadow: 2px 3px #677c4b28;
+}
+.cinema-sign:hover {
+  transform: rotate(0);
+}
+.entrance .map-art {
+  opacity: 0.58;
+  filter: blur(1px);
+}
+.invitation {
+  position: absolute;
+  left: 50%;
+  top: 47%;
+  transform: translate(-50%, -50%) rotate(-2deg);
+  width: 420px;
+  max-width: 77%;
+  padding: 28px 35px 35px;
+  text-align: center;
+  background: #fff9e7;
+  box-shadow:
+    3px 8px 0 #5f613e25,
+    0 15px 35px #453c3124;
+  border: 1px solid #aeab8d;
+  border-radius: 2px 6px 2px 4px;
+}
+.invitation::before {
+  content: "";
+  position: absolute;
+  top: -13px;
+  left: calc(50% - 35px);
+  width: 70px;
+  height: 27px;
+  background: #d8c78692;
+  transform: rotate(6deg);
+}
+.whisper {
+  font: 500 30px var(--hand);
+  color: var(--red);
+  display: block;
+  margin-bottom: 5px;
+  transform: rotate(-8deg);
+}
+.invitation h1 {
+  font-size: 60px;
+  line-height: 0.92;
+  color: #2d628b;
+}
+.invitation p {
+  font-size: 14px;
+  max-width: 285px;
+  margin: 20px auto 22px;
+}
+.knock-button {
+  font: 700 28px var(--hand);
+  color: #fff9e7;
+  background: var(--blue);
+  display: inline-flex;
+  align-items: center;
+  gap: 25px;
+  padding: 7px 24px 10px;
+  border: 2px solid #284f70;
+  border-radius: 5px 8px 4px 9px;
+  box-shadow: 3px 4px 0 #aec0c1;
+  transform: rotate(2deg);
+}
+.knock-button:hover {
+  transform: rotate(-1deg);
+  background: #295a81;
+}
+.door-opening {
+  animation: open-letter 0.45s ease-in forwards;
+  transform-origin: 0 50%;
+}
+@keyframes open-letter {
+  to {
+    opacity: 0;
+    transform: translate(-50%, -50%) rotate(-6deg) scale(1.2);
+  }
+}
+.room-world {
+  flex: 1;
+  padding: 28px 24px;
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  background:
+    linear-gradient(#f5f0dcea, #f5f0dcea),
+    url("/assets/village.jpg") center/cover fixed;
+}
+.room {
+  width: min(1040px, 100%);
+  background: #fffbec;
+  border: 1px solid #bdb99c;
+  box-shadow:
+    5px 6px 0 #c0b99555,
+    0 12px 30px #4d513611;
+  padding: 22px 46px 25px;
+  position: relative;
+  border-radius: 4px 8px 5px 2px;
+}
+.room::before {
+  content: "";
+  position: absolute;
+  inset: 7px;
+  border: 1px solid #c4c0a340;
+  pointer-events: none;
+}
+.room-back {
+  display: inline-block;
+  font: 600 21px var(--hand);
+  color: #667151;
+}
+.room-back:hover {
+  color: var(--red);
+}
+.room-heading {
+  text-align: center;
+  margin: 0 0 22px;
+}
+.room-heading h1 {
+  font-size: 53px;
+  color: #346788;
+  transform: rotate(-2deg);
+}
+.room-heading p {
+  margin-top: 5px;
+}
+.about-spread {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 55px;
+  padding: 15px 0 28px;
+}
+.school-note {
+  border: 1px solid #c9b98e;
+  background: #f8edca;
+  padding: 28px;
+  transform: rotate(-2deg);
+  position: relative;
+  align-self: start;
+}
+.handwritten {
+  font: 500 26px var(--hand);
+  color: var(--blue);
+}
+.school-note h2 {
+  font-size: 42px;
+  margin: 16px 0;
+}
+.school-note p {
+  font-size: 14px;
+  max-width: 250px;
+}
+.blue-pencil {
+  display: block;
+  font: 700 100px/1 var(--hand);
+  color: #6f9cb8;
+  transform: rotate(9deg);
+  text-align: right;
+  margin-top: 15px;
+}
+.about-notes article + article {
+  margin-top: 30px;
+}
+.about-notes h2 {
+  font-size: 33px;
+  margin-bottom: 12px;
+}
+.about-notes p {
+  font-size: 15px;
+  line-height: 1.7;
+}
+.ink-link {
+  font: 600 23px var(--hand);
+  color: var(--blue);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+  display: inline-block;
+  margin-top: 13px;
+}
+.album-spread {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 26px;
+  padding: 20px 4px 8px;
+}
+.member {
+  text-align: center;
+}
+.polaroid {
+  background: #fffef6;
+  padding: 9px 9px 0;
+  border: 1px solid #cbc9b3;
+  box-shadow: 2px 4px 0 #8a876722;
+  transform: rotate(-4deg);
+}
+.member:nth-child(even) .polaroid {
+  transform: rotate(3deg);
+}
+.member:nth-child(3) .polaroid {
+  transform: rotate(-1deg);
+}
+.polaroid .photo-placeholder {
+  aspect-ratio: 4/5;
+  border: none;
+}
+.polaroid p {
+  font: 24px var(--hand);
+  padding: 6px 0 10px;
+}
+.polaroid img {
+  width: 100%;
+  aspect-ratio: 4/5;
+  object-fit: cover;
+}
+.photo-placeholder {
+  background: #e5e8db;
+  border: 1px solid #a8b29b;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  text-align: center;
+  aspect-ratio: 4/3;
+  padding: 15px;
+  color: #73816b;
+}
+.photo-placeholder > svg {
+  width: 40px;
+  height: 40px;
+  opacity: 0.75;
+}
+.photo-placeholder > span {
+  font: 22px var(--hand);
+}
+.member h2 {
+  font: 600 25px var(--hand);
+  margin-top: 18px;
+}
+.contribution {
+  font-size: 12px;
+  margin-top: 6px;
+  color: #73775f;
+}
+.pager {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 28px;
+  border-top: 1px solid var(--line);
+  padding-top: 16px;
+  gap: 12px;
+}
+.pager button {
+  font: 600 23px var(--hand);
+  border: 0;
+  background: none;
+  padding: 4px 8px;
+  min-height: 42px;
+}
+.pager button:hover {
+  color: var(--blue);
+}
+.pager button:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+.page-count {
+  font: 21px var(--hand);
+  color: #6d765b;
+  white-space: nowrap;
+}
+.small-note {
+  font-size: 12px;
+  text-align: center;
+  color: #73765f;
+  margin-top: 18px;
+}
+.game-empty {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 50px;
+  padding: 26px 15px 40px;
+}
+.waiting-note {
+  padding: 28px 20px;
+  background: #f4e8ba;
+  transform: rotate(-3deg);
+  position: relative;
+  box-shadow: 3px 4px #66674614;
+}
+.waiting-note h2 {
+  font-size: 39px;
+  margin: 12px 0 20px;
+}
+.waiting-note p {
+  font-size: 14px;
+}
+.paperclip {
+  position: absolute;
+  font-size: 65px;
+  top: -40px;
+  right: 30px;
+  color: #6e7967;
+  transform: rotate(5deg);
+}
+.rule-list {
+  padding-left: 30px;
+  font: 26px var(--hand);
+  counter-reset: rules;
+}
+.rule-list li {
+  padding: 12px 0;
+  color: #5b7059;
+}
+.pencil-line {
+  display: block;
+  height: 1px;
+  background: #92998055;
+  margin-top: 13px;
+  width: 100%;
+}
+.tabs {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 9px;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 24px;
+  padding-bottom: 14px;
+}
+.tabs button {
+  font: 600 23px var(--hand);
+  padding: 5px 15px;
+  background: #f3efd9;
+  border: 1px solid #b7b89e;
+  border-radius: 3px 5px 2px 4px;
+}
+.tabs button[aria-selected="true"] {
+  background: #dce6d7;
+  border-color: #63795b;
+  color: #355c38;
+  transform: rotate(-2deg);
+  box-shadow: 1px 2px #68745936;
+}
+.tabs button:hover {
+  border-color: var(--blue);
+}
+.robot-spread {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 35px;
+  align-items: center;
+  padding-bottom: 20px;
+}
+.robot-spread > .photo-placeholder {
+  background-color: #e8eddf;
+  background-image:
+    linear-gradient(#748e6930 1px, transparent 1px),
+    linear-gradient(90deg, #748e6930 1px, transparent 1px);
+  background-size: 22px 22px;
+  aspect-ratio: 1.25;
+}
+.technical-note h2 {
+  margin: 13px 0;
+  font-size: 37px;
+}
+.technical-note > p:not(.handwritten) {
+  font-size: 15px;
+}
+.blank-lines {
+  height: 80px;
+  margin-top: 18px;
+  background: repeating-linear-gradient(
+    transparent 0 25px,
+    #87957545 25px 26px
+  );
+}
+.photo-slide {
+  display: flex;
+  justify-content: center;
+}
+.large-polaroid {
+  width: min(560px, 100%);
+  padding: 12px 12px 7px;
+  background: #fffef7;
+  border: 1px solid #ccc8ad;
+  box-shadow: 3px 5px #66674624;
+  transform: rotate(-2deg);
+}
+.large-polaroid .photo-placeholder {
+  aspect-ratio: 16/8;
+}
+.large-polaroid figcaption {
+  text-align: center;
+  font: 29px var(--hand);
+  padding: 10px;
+}
+.notebook-page {
+  padding: 10px 20px 20px 35px;
+  border-left: 2px solid #b65c484a;
+  background: repeating-linear-gradient(
+    transparent 0 31px,
+    #7895a221 31px 32px
+  );
+}
+.notebook-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+}
+.notebook-meta h2 {
+  font-size: 35px;
+}
+.notebook-meta span {
+  font: 21px var(--hand);
+  color: #727964;
+}
+.empty-journal {
+  margin: 17px 0;
+  color: #7f846d;
+}
+.journal-prompts {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+.journal-prompts h3 {
+  font-size: 24px;
+}
+.writing-line {
+  height: 75px;
+}
+.cinema {
+  text-align: center;
+}
+.film-frame {
+  background: #42483d;
+  padding: 12px;
+  border: 1px solid #292f26;
+  position: relative;
+  width: min(570px, 100%);
+  margin: auto;
+  box-shadow: 3px 5px #74735b30;
+  transform: rotate(-1deg);
+}
+.film-frame .photo-placeholder {
+  background: #dee1d2;
+  aspect-ratio: 16/7;
+  border: 0;
+}
+.film-corner {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  color: #7a8372;
+}
+.cinema > .handwritten {
+  margin-top: 23px;
+}
+.credits-note {
+  max-width: 700px;
+  margin: auto;
+  padding-bottom: 20px;
+}
+.credits-note p {
+  margin-top: 20px;
+  line-height: 1.75;
+  font-size: 15px;
+}
+.credits-note h2 {
+  font-size: 35px;
+}
+dialog {
+  background: #fff9e7;
+  color: var(--ink);
+  border: 1px solid #9b9d81;
+  border-radius: 4px 8px 2px 4px;
+  box-shadow: 8px 10px #43472f30;
+  padding: 40px;
+  width: min(540px, calc(100% - 36px));
+  max-height: 85svh;
+}
+dialog::backdrop {
+  background: #273b3080;
+  backdrop-filter: blur(3px);
+}
+dialog h2 {
+  font-size: 40px;
+  margin-bottom: 25px;
+}
+dialog nav {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px 24px;
+}
+dialog nav a {
+  font: 600 24px var(--hand);
+  padding: 10px 0;
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+dialog nav a:hover,
+dialog nav a[aria-current] {
+  color: var(--blue);
+}
+.close-map {
+  position: absolute;
+  right: 10px;
+  top: 4px;
+  border: 0;
+  background: none;
+  font: 36px var(--hand);
+  padding: 0 10px;
+}
+.skip {
+  position: absolute;
+  top: -100px;
+  left: 20px;
+  z-index: 10;
+  padding: 10px;
+  background: var(--paper);
+}
+.skip:focus {
+  top: 10px;
+}
+[hidden] {
+  display: none !important;
+}
+@media (min-width: 1500px) {
+  .room-world {
+    align-items: center;
+  }
+  .room {
+    padding-block: 28px 32px;
+  }
+}
+@media (max-width: 900px) {
+  .site-header {
+    padding-inline: 22px;
+  }
+  .site-footer {
+    padding-inline: 22px;
+  }
+  .room {
+    padding: 20px 27px;
+  }
+  .room-heading h1 {
+    font-size: 48px;
+  }
+  .about-spread {
+    gap: 30px;
+  }
+  .album-spread {
+    gap: 16px;
+  }
+  .polaroid {
+    padding: 6px 6px 0;
+  }
+  .polaroid p {
+    font-size: 21px;
+  }
+  .member h2 {
+    font-size: 22px;
+  }
+  .photo-placeholder > span {
+    font-size: 19px;
+  }
+  .game-empty {
+    gap: 30px;
+    padding-inline: 0;
+  }
+  .waiting-note h2 {
+    font-size: 34px;
+  }
+  .tabs {
+    gap: 6px;
+  }
+  .tabs button {
+    font-size: 21px;
+    padding-inline: 12px;
+  }
+
+  .map-title p {
+    font-size: 21px;
+  }
+}
+@media (max-width: 600px) {
+  .site-header {
+    height: 72px;
+    padding-inline: 16px;
+  }
+  .school-brand {
+    gap: 8px;
+    font-size: 11px;
+    max-width: 235px;
+  }
+  .school-brand small {
+    font-size: 19px;
+  }
+  .school-crest {
+    width: 42px;
+    height: 42px;
+  }
+  .header-actions {
+    gap: 7px;
+  }
+  .map-button {
+    font-size: 20px;
+    padding-inline: 4px;
+    white-space: nowrap;
+  }
+  .map-button span {
+    display: none;
+  }
+  .locale-button {
+    padding-left: 10px;
+    font-size: 12px;
+  }
+  .site-footer {
+    padding: 9px 16px;
+    font-size: 10px;
+    min-height: 46px;
+  }
+  .site-footer > span {
+    max-width: 260px;
+  }
+  .world {
+    padding: 0;
+    overflow: hidden;
+    min-height: calc(100svh - 118px);
+    align-items: center;
+  }
+  .village-canvas {
+    width: 100%;
+    height: calc(100svh - 118px);
+    min-height: 480px;
+    aspect-ratio: auto;
+  }
+  .map-art {
+    object-fit: cover;
+    object-position: center;
+    opacity: 0.8;
+  }
+  .village .map-art {
+    object-fit: cover;
+    object-position: center;
+    opacity: 0.48;
+  }
+  .village .map-title {
+    top: 6%;
+    width: 94%;
+    transform: translateX(-50%) rotate(-2deg);
+  }
+  .map-title h1 {
+    font-size: 43px;
+    max-width: 290px;
+    margin: auto;
+  }
+  .map-title p {
+    font-size: 24px;
+    margin-top: 10px;
+  }
+  .houses {
+    position: absolute;
+    inset: 30% 18px 13%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: repeat(3, 1fr);
+    gap: 17px;
+  }
+  .house {
+    position: relative;
+    inset: auto;
+    width: auto;
+    height: auto;
+    justify-content: center;
+    align-items: stretch;
+    border-radius: 0;
+  }
+  .house-label {
+    font-size: 26px;
+    white-space: normal;
+    text-align: center;
+    padding: 13px 6px;
+    background: #fff7de;
+    box-shadow: 3px 4px #64744140;
+    border: 1px solid #707650;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    min-height: 63px;
+  }
+
+  .house:hover,
+  .house:focus-visible {
+    transform: none;
+  }
+  .cinema-sign {
+    bottom: 4%;
+    left: 50%;
+    transform: translateX(-50%) rotate(-3deg);
+    font-size: 22px;
+    white-space: nowrap;
+  }
+  .cinema-sign:hover {
+    transform: translateX(-50%);
+  }
+  .invitation {
+    width: 330px;
+    max-width: 85%;
+    padding: 25px 22px 30px;
+    top: 47%;
+  }
+  .invitation h1 {
+    font-size: 53px;
+  }
+  .invitation p {
+    font-size: 14px;
+  }
+  .whisper {
+    font-size: 29px;
+  }
+  .knock-button {
+    font-size: 27px;
+  }
+  .room-world {
+    padding: 16px 12px;
+  }
+  .room {
+    padding: 17px 18px 20px;
+  }
+  .room-heading {
+    margin: 9px 0 22px;
+  }
+  .room-heading h1 {
+    font-size: 44px;
+  }
+  .room-back {
+    font-size: 20px;
+  }
+  .about-spread {
+    grid-template-columns: 1fr;
+    gap: 30px;
+    padding: 0 2px 10px;
+  }
+  .school-note {
+    padding: 23px;
+  }
+  .school-note h2 {
+    font-size: 35px;
+    max-width: 270px;
+  }
+  .blue-pencil {
+    font-size: 72px;
+    position: absolute;
+    right: 15px;
+    bottom: 6px;
+    opacity: 0.4;
+  }
+  .school-note p {
+    max-width: 235px;
+  }
+  .about-notes article + article {
+    margin-top: 25px;
+  }
+  .about-notes h2 {
+    font-size: 32px;
+  }
+  .album-spread {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px 18px;
+    padding: 6px 2px;
+  }
+  .photo-placeholder > svg {
+    width: 30px;
+    height: 30px;
+  }
+  .polaroid .photo-placeholder {
+    aspect-ratio: 1;
+  }
+  .polaroid p {
+    font-size: 21px;
+    padding: 5px 0;
+  }
+  .photo-placeholder > span {
+    font-size: 18px;
+  }
+  .member h2 {
+    margin-top: 9px;
+    font-size: 23px;
+  }
+  .contribution {
+    font-size: 11px;
+    margin-top: 3px;
+  }
+  .pager {
+    margin-top: 22px;
+    padding-top: 12px;
+  }
+  .pager button {
+    font-size: 20px;
+    padding-inline: 2px;
+  }
+  .page-count {
+    font-size: 19px;
+  }
+  .small-note {
+    font-size: 11px;
+    line-height: 1.5;
+    margin-top: 12px;
+  }
+  .game-empty {
+    grid-template-columns: 1fr;
+    gap: 22px;
+    padding: 12px 6px 8px;
+  }
+  .waiting-note {
+    padding: 24px;
+  }
+  .waiting-note h2 {
+    font-size: 36px;
+  }
+  .rule-list {
+    padding-left: 25px;
+    font-size: 25px;
+  }
+  .rule-list li {
+    padding: 7px 0;
+  }
+  .tabs {
+    gap: 6px;
+    justify-content: flex-start;
+    margin-bottom: 20px;
+  }
+  .tabs button {
+    font-size: 20px;
+    padding: 5px 10px;
+  }
+  .robot-spread {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding-bottom: 0;
+  }
+  .robot-spread > .photo-placeholder {
+    aspect-ratio: 1.8;
+  }
+  .blank-lines {
+    height: 50px;
+  }
+  .large-polaroid {
+    padding: 8px 8px 4px;
+  }
+  .large-polaroid .photo-placeholder {
+    aspect-ratio: 1.4;
+  }
+  .large-polaroid figcaption {
+    font-size: 26px;
+    padding: 7px;
+  }
+  .photo-slide {
+    padding: 8px 4px;
+  }
+  .notebook-page {
+    padding: 6px 0 8px 15px;
+  }
+  .notebook-meta {
+    flex-direction: column;
+    align-items: start;
+    gap: 5px;
+  }
+  .journal-prompts {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  .writing-line {
+    height: 40px;
+  }
+  .notebook-meta h2 {
+    font-size: 32px;
+  }
+  .empty-journal {
+    margin: 15px 0;
+  }
+  .film-frame {
+    padding: 8px;
+  }
+  .film-frame .photo-placeholder {
+    aspect-ratio: 1.4;
+  }
+  .cinema > .handwritten {
+    font-size: 24px;
+    line-height: 1.25;
+  }
+  .credits-note p {
+    font-size: 14px;
+  }
+  dialog {
+    padding: 34px 24px;
+  }
+  dialog h2 {
+    font-size: 35px;
+  }
+  dialog nav {
+    gap: 2px 18px;
+  }
+  dialog nav a {
+    font-size: 23px;
+  }
+  .map-page .site-footer {
+    background: var(--paper);
+  }
+}
+@media (max-height: 650px) and (min-width: 601px) {
+  .site-header {
+    height: 62px;
+  }
+  .village-canvas {
+    width: min(100%, calc((100svh - 100px) * 1.5));
+  }
+  .invitation {
+    padding: 18px 28px;
+    width: 380px;
+  }
+  .invitation h1 {
+    font-size: 44px;
+  }
+  .invitation p {
+    margin: 13px 0;
+    font-size: 13px;
+  }
+  .whisper {
+    font-size: 24px;
+  }
+  .knock-button {
+    font-size: 24px;
+    padding-block: 4px;
+  }
+  .map-title h1 {
+    font-size: 33px;
+  }
+  .map-title p {
+    font-size: 19px;
+  }
+  .house-label {
+    font-size: 22px;
+  }
+  .cinema-sign {
+    font-size: 18px;
+  }
+  .site-footer {
+    min-height: 38px;
+  }
+  .room-world {
+    padding-top: 16px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+  .door-opening {
+    opacity: 1;
+  }
+}
+
+@font-face {
+  font-family: SchoolManrope;
+  src: url("/assets/fonts/Manrope-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+.school-brand {
+  font-family: SchoolManrope, Arial, sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.025em;
+  text-transform: uppercase;
+  font-size: 15px;
+}
+.school-brand small {
+  font-family: SchoolManrope, Arial, sans-serif;
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.13em;
+  margin-top: 5px;
+}
+.site-footer {
+  justify-content: flex-end;
+}
+@media (max-width: 600px) {
+  .school-brand {
+    font-size: 10px;
+    max-width: 235px;
+  }
+  .school-brand small {
+    font-size: 10px;
+    letter-spacing: 0.09em;
+    margin-top: 4px;
+  }
+}
+
+/* The village fills the viewport; controls float over the drawing. */
+.map-page {
+  height: 100svh;
+  min-height: 100svh;
+  overflow: hidden;
+}
+.world {
+  display: block;
+  padding: 0;
+  min-height: 0;
+  height: 100svh;
+  overflow: hidden;
+}
+.village-canvas {
+  width: 100%;
+  height: 100svh;
+  min-height: 0;
+  aspect-ratio: auto;
+}
+.map-art {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  opacity: 1;
+  mix-blend-mode: normal;
+}
+.entrance .map-art,
+.village .map-art {
+  opacity: 1;
+  filter: none;
+}
+.houses {
+  position: absolute;
+  width: max(100vw, 150svh);
+  height: max(100svh, 66.666667vw);
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+.map-title {
+  top: 46%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 42%;
+}
+.centered-school-logo {
+  width: clamp(140px, 23svh, 230px);
+  height: auto;
+  margin: 0 auto 14px;
+}
+.map-title h1 {
+  font-size: clamp(30px, 3.6vw, 53px);
+}
+.map-title p {
+  margin-top: 8px;
+}
+.invitation {
+  top: 50%;
+  padding: 22px 30px 28px;
+}
+.invitation .centered-school-logo {
+  width: clamp(115px, 19svh, 185px);
+  margin-bottom: 12px;
+}
+.invitation h1 {
+  font-size: clamp(38px, 6svh, 58px);
+  margin-bottom: 28px;
+}
+.floating-locale {
+  position: fixed;
+  top: 20px;
+  right: 24px;
+  z-index: 20;
+  border: 1px solid #777b5750;
+  border-radius: 4px;
+  background: #fff9e6dd;
+  padding: 9px 13px;
+  font:
+    700 14px SchoolManrope,
+    Arial,
+    sans-serif;
+  box-shadow: 1px 2px #48553420;
+}
+.site-footer,
+.map-page .site-footer {
+  position: fixed;
+  right: 12px;
+  bottom: 9px;
+  z-index: 10;
+  margin: 0;
+  padding: 0;
+  min-height: 0;
+  background: transparent;
+}
+.site-footer a {
+  font-size: 10px;
+  color: #37412f;
+  background: #f5f0dc9e;
+  padding: 2px 5px;
+  border-radius: 2px;
+  opacity: 0.5;
+}
+.site-footer a:hover,
+.site-footer a:focus-visible {
+  opacity: 1;
+}
+.room-world {
+  min-height: 100svh;
+  padding-top: 58px;
+  padding-bottom: 40px;
+}
+@media (max-width: 600px) {
+  .floating-locale {
+    top: 12px;
+    right: 12px;
+  }
+  .village .map-title {
+    top: 5%;
+    width: 90%;
+    transform: translateX(-50%);
+  }
+  .map-title .centered-school-logo {
+    width: clamp(105px, 18svh, 160px);
+    margin-bottom: 8px;
+  }
+  .map-title h1 {
+    font-size: clamp(30px, 8vw, 40px);
+    max-width: 100%;
+  }
+  .map-title p {
+    font-size: 22px;
+    margin-top: 5px;
+  }
+  .houses {
+    inset: 40% 18px 12%;
+    width: auto;
+    height: auto;
+    transform: none;
+    gap: 14px;
+  }
+  .house-label {
+    min-height: 52px;
+    padding: 10px 6px;
+  }
+  .cinema-sign {
+    bottom: 5%;
+  }
+  .invitation {
+    max-width: 85%;
+    padding: 20px 22px 25px;
+  }
+  .invitation .centered-school-logo {
+    width: clamp(105px, 18svh, 160px);
+  }
+  .room-world {
+    padding-top: 56px;
+  }
+}
+@media (max-height: 580px) {
+  .centered-school-logo {
+    width: 105px;
+    margin-bottom: 5px;
+  }
+  .map-title h1 {
+    font-size: 29px;
+  }
+  .map-title p {
+    font-size: 19px;
+  }
+  .invitation .centered-school-logo {
+    width: 90px;
+  }
+  .invitation {
+    padding: 12px 22px;
+  }
+  .invitation .whisper {
+    display: none;
+  }
+  .invitation h1 {
+    font-size: 34px;
+  }
+  .invitation p {
+    margin: 9px auto;
+  }
+}
+
+/* Scale the complete village to the screen height, with forest at the sides. */
+.world {
+  background: #faf3dc;
+}
+.map-picture {
+  display: block;
+  position: absolute;
+  width: 300svh;
+  height: 100svh;
+  max-width: none;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+.map-picture .map-art {
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  object-fit: contain;
+}
+.houses {
+  display: block;
+  inset: auto;
+  width: 300svh;
+  height: 100svh;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+.house {
+  width: 12%;
+  height: 28%;
+}
+.house-0 {
+  left: 26%;
+  top: 10%;
+}
+.house-1 {
+  left: 41.5%;
+  top: 0;
+}
+.house-2 {
+  left: 59.5%;
+  top: 10%;
+}
+.house-3 {
+  left: 25%;
+  top: 55%;
+}
+.house-4 {
+  left: 42%;
+  top: 67%;
+}
+.house-5 {
+  left: 59.5%;
+  top: 52%;
+}
+.house-label {
+  font-size: clamp(19px, 3svh, 32px);
+}
+.map-title {
+  top: 47%;
+  width: min(50svh, 42vw);
+}
+.map-title .centered-school-logo {
+  width: clamp(110px, 20svh, 220px);
+  margin-bottom: 10px;
+}
+.map-title h1 {
+  font-size: clamp(28px, 4.5svh, 54px);
+}
+
+/* Portrait screens get the whole map, with the title above the drawing. */
+@media (max-aspect-ratio: 1333/1000) {
+  .map-page {
+    height: auto;
+    min-height: 100svh;
+    overflow-x: clip;
+    overflow-y: auto;
+  }
+  .world {
+    height: auto;
+    min-height: 100svh;
+    overflow: visible;
+  }
+  .village .village-canvas {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    align-content: center;
+    gap: clamp(12px, 2svh, 24px);
+    height: auto;
+    min-height: 100svh;
+    padding: max(52px, env(safe-area-inset-top)) 0
+      max(36px, env(safe-area-inset-bottom));
+  }
+  .village .map-picture,
+  .village .houses {
+    grid-area: 2 / 1;
+    position: relative;
+    inset: auto;
+    transform: none;
+    justify-self: center;
+    width: min(100%, 840px);
+    height: auto;
+    aspect-ratio: 3 / 2;
+    margin: 0;
+  }
+  .village .houses {
+    display: block;
+    align-self: stretch;
+  }
+  .village .map-title {
+    grid-area: 1 / 1;
+    position: relative;
+    inset: auto;
+    transform: none;
+    width: 100%;
+    padding: 0 40px;
+  }
+  .map-title .centered-school-logo {
+    width: clamp(80px, 14svh, 140px);
+    margin-bottom: 12px;
+  }
+  .map-title h1 {
+    font-size: clamp(28px, 6vw, 42px);
+    max-width: none;
+  }
+  .village .house {
+    position: absolute;
+    width: 26%;
+    height: 28%;
+    min-height: 44px;
+    align-items: center;
+    justify-content: flex-end;
+    border-radius: 45%;
+  }
+  .house-0 {
+    left: 8%;
+    top: 10%;
+  }
+  .house-1 {
+    left: 36%;
+    top: 0;
+  }
+  .house-2 {
+    left: 66%;
+    top: 10%;
+  }
+  .house-3 {
+    left: 6%;
+    top: 51%;
+  }
+  .house-4 {
+    left: 36%;
+    top: 64%;
+  }
+  .house-5 {
+    left: 67%;
+    top: 48%;
+  }
+  .house-label {
+    min-height: 0;
+    padding: 3px 8px 5px;
+    font-size: clamp(18px, 4.8vw, 27px);
+    white-space: nowrap;
+    line-height: 1.1;
+  }
+  .village .cinema-sign {
+    grid-area: 3 / 1;
+    position: relative;
+    inset: auto;
+    justify-self: center;
+    transform: rotate(-3deg);
+    min-height: 44px;
+    margin: 0;
+  }
+  .village .cinema-sign:hover {
+    transform: rotate(0);
+  }
+  .entrance .map-picture {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 3 / 2;
+  }
+}
