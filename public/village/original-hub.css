@@ -10,4 +10,4 @@
 .house:hover .house-label,.house:focus-visible .house-label{box-shadow:2px 5px #4e5e3b44;transform:translateY(-3px) rotate(0deg)}
 .map-title{z-index:3}
 .map-title .centered-school-logo{filter:none}
-@media(max-aspect-ratio:1333/1000){.village .village-canvas{position:relative;display:block;height:100svh;min-height:100svh;padding:0}.village .map-picture,.village .houses{position:absolute;inset:0;width:100%;height:100%;margin:0;transform:none}.village .map-title{position:absolute;top:5%;left:50%;transform:translateX(-50%);z-index:3}.village .house{position:absolute}.village .cinema-sign{position:absolute;z-index:4}}
+@media(max-aspect-ratio:1333/1000){.village .village-canvas{position:relative;display:block;height:100svh;min-height:100svh;padding:0}.village .map-picture,.village .houses{position:absolute;inset:0;width:100%;height:100%;margin:0;transform:none}.village .map-title{position:absolute;top:14%;left:50%;transform:translateX(-50%);z-index:3;width:62%}.village .map-title .centered-school-logo{width:110px;height:110px;margin-inline:auto}.village .house{position:absolute}.village .cinema-sign{position:absolute;z-index:4}}
