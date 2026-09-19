@@ -26,14 +26,18 @@ export function villageBackground(){return `<svg class="village-scenery desktop-
  <path fill="url(#meadow)" d="M0 0h1400v900H0Z"/>
  <path d="M140 0 175 74 241 40 308 96 405 35 478 85 554 0M900 0l86 69 82-50 65 90 125-67 40-42" fill="#a8b7a1" opacity=".6"/>
  <path d="M-70 696C100 688 81 802 240 814S368 951 574 935M1504 427Q1303 450 1350 575Q1378 624 1480 661" fill="none" stroke="#89a882" stroke-width="69"/><path d="M-70 696C100 688 81 802 240 814S368 951 574 935M1504 427Q1303 450 1350 575Q1378 624 1480 661" fill="none" stroke="#75b7c6" stroke-width="52"/><path d="M-20 698Q58 696 82 749M244 814Q312 827 340 870M1389 465Q1342 485 1357 522" fill="none" stroke="#c8e6d9" stroke-width="4"/>
- <path d="M300 740Q270 742 235 750Q170 775 105 845L44 920" fill="none" stroke="#e8d6a5" stroke-width="42"/><path d="M235 750Q170 775 105 845" fill="none" stroke="#806744" stroke-width="58"/><path d="M235 750Q170 775 105 845" fill="none" stroke="#c79f65" stroke-width="52"/><path d="m224 726 22 48m-54-32 28 44m-62-20 36 39m-64-9 38 34m-66-9 39 32" stroke="#a58051" stroke-width="3"/>
+ <path d="M215 745L135 855Q112 887 100 930" fill="none" stroke="#e8d6a5" stroke-width="42"/>
+ <g transform="translate(175 800) rotate(36)"><path d="M-26-69H26V69H-26Z" fill="#c99f64" stroke="#826747" stroke-width="3"/><path d="M-23-52H23M-23-34H23M-23-16H23M-23 2H23M-23 20H23M-23 38H23M-23 56H23" fill="none" stroke="#a27b4c" stroke-width="2"/><path d="M-27-68V68M27-68V68" stroke="#8d6d46" stroke-width="5"/></g>
+
 
  <use href="#tree" transform="translate(64 50) scale(1.25)"/><use href="#tree" transform="translate(1360 44) scale(1.3)"/><use href="#tree" transform="translate(35 422) scale(.85)"/>
  <use href="#bush" transform="translate(54 636)"/><use href="#bush" transform="translate(1260 122) scale(.6)"/><use href="#bush" transform="translate(1383 703) scale(1.3)"/><use href="#bush" transform="translate(1007 888) scale(1.5)"/><use href="#bush" transform="translate(435 880)"/><use href="#bush" transform="translate(549 70) scale(.8)"/>
  <g fill="#fff0c5"><circle cx="125" cy="583" r="5"/><circle cx="121" cy="667" r="5"/><circle cx="1057" cy="761" r="5"/><circle cx="1019" cy="749" r="4"/><circle cx="407" cy="142" r="4"/><circle cx="1150" cy="397" r="5"/></g></svg><svg class="village-scenery mobile-scenery" viewBox="0 0 500 900" preserveAspectRatio="none" aria-hidden="true">
  <path fill="#c4d8a1" d="M0 0h500v900H0Z"/>
  <path d="M-30 698Q93 724 42 821Q23 866 157 924M542 487Q454 479 490 563Q516 609 557 610" fill="none" stroke="#8baa7d" stroke-width="48"/><path d="M-30 698Q93 724 42 821Q23 866 157 924M542 487Q454 479 490 563Q516 609 557 610" fill="none" stroke="#75b7c6" stroke-width="35"/>
- <path d="M100 700Q94 733 96 765Q65 815 22 865L35 925" fill="none" stroke="#e8d6a5" stroke-width="29"/><path d="M96 765Q65 815 22 865" fill="none" stroke="#826d47" stroke-width="37"/><path d="M96 765Q65 815 22 865" fill="none" stroke="#c79f65" stroke-width="33"/><path d="m83 756 27 20m-42 4 28 21m-45 5 29 21m-49 6 30 21" stroke="#a58051" stroke-width="2"/>
+ <path d="M89 765L25 861Q15 893 35 925" fill="none" stroke="#e8d6a5" stroke-width="29"/>
+ <g transform="translate(57 813) rotate(34)"><path d="M-18-58H18V58H-18Z" fill="#c99f64" stroke="#826747" stroke-width="2"/><path d="M-16-43H16M-16-27H16M-16-11H16M-16 5H16M-16 21H16M-16 37H16M-16 53H16" fill="none" stroke="#a27b4c" stroke-width="1.5"/><path d="M-19-58V58M19-58V58" stroke="#8d6d46" stroke-width="3"/></g>
+
 
  <svg x="-55" y="-30" width="160" height="245" viewBox="-125 -100 260 310" preserveAspectRatio="xMidYMid meet"><use href="#tree"/></svg><svg x="400" y="-25" width="160" height="245" viewBox="-125 -100 260 310" preserveAspectRatio="xMidYMid meet"><use href="#tree"/></svg><svg x="-85" y="332" width="145" height="215" viewBox="-125 -100 260 310" preserveAspectRatio="xMidYMid meet"><use href="#tree"/></svg>
  <svg x="375" y="822" width="150" height="75" viewBox="-70 -60 145 110" preserveAspectRatio="xMidYMid meet"><use href="#bush"/></svg><svg x="438" y="647" width="85" height="60" viewBox="-70 -60 145 110" preserveAspectRatio="xMidYMid meet"><use href="#bush"/></svg>

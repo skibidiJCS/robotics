@@ -18,8 +18,8 @@ export function renderOriginalHub(){
   let ring=`M${nodes[0].x} ${nodes[0].y}`;
   for(let i=0;i<nodes.length;i++){const a=nodes[(i+5)%6],b=nodes[i],c=nodes[(i+1)%6],d=nodes[(i+2)%6];ring+=` C${b.x+(c.x-a.x)/8} ${b.y+(c.y-a.y)/8} ${c.x-(d.x-b.x)/8} ${c.y-(d.y-b.y)/8} ${c.x} ${c.y}`;}
   let paths=doors.map(d=>`M${d.x} ${d.y}V${Math.min(h-10,d.y+(phone?18:28))}`).join(' ');
-  const bridge={x:w*(phone?100/500:300/1400),y:h*(phone?700/900:740/900)},near=nodes[4];
-  paths+=` M${near.x} ${near.y}Q${bridge.x} ${near.y} ${bridge.x} ${bridge.y}`;
+  const bridge={x:w*(phone?89/500:215/1400),y:h*(phone?765/900:745/900)},near=nodes[4];
+  paths+=` M${near.x} ${near.y}C${near.x} ${near.y+30} ${bridge.x+20} ${bridge.y-35} ${bridge.x} ${bridge.y}`;
   roads.innerHTML=`<path d="${ring}Z ${paths}" fill="none" stroke="#e8d6a5" stroke-width="${stroke}" stroke-linecap="round" stroke-linejoin="round"/>`;
 
  }
