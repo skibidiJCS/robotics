@@ -1,0 +1,13 @@
+/* Flexible canvas village: the original circular layout, recoloured with the game's palette. */
+.map-page{background:#a9c69a;overflow:hidden}
+.world{background:#a9c69a}
+.village-canvas{position:relative}
+.map-picture{display:block;position:absolute;inset:0;width:100%;height:100%;max-width:none;transform:none;object-fit:fill;z-index:0}
+.map-picture .map-art{display:none}
+.houses{z-index:2}
+.house{transition:transform .2s ease,filter .2s ease}
+.house:hover,.house:focus-visible{filter:brightness(1.06) saturate(1.1);transform:translate(-50%,-4px) rotate(0deg)}
+.house:hover .house-label,.house:focus-visible .house-label{box-shadow:2px 5px #4e5e3b44;transform:translateY(-3px) rotate(0deg)}
+.map-title{z-index:3}
+.map-title .centered-school-logo{filter:none}
+@media(max-aspect-ratio:1333/1000){.village .village-canvas{position:relative;display:block;height:100svh;min-height:100svh;padding:0}.village .map-picture,.village .houses{position:absolute;inset:0;width:100%;height:100%;margin:0;transform:none}.village .map-title{position:absolute;top:5%;left:50%;transform:translateX(-50%);z-index:3}.village .house{position:absolute}.village .cinema-sign{position:absolute;z-index:4}}

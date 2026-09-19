@@ -65,7 +65,7 @@ async function navigate(href, { replace = false, pop = false } = {}) {
 }
 
 function initializePage() {
-  if(document.querySelector('#village-ground'))import('/village/hub.js').then(m=>m.renderHub());
+  if(document.querySelector('#village-art'))import('/village/original-hub.js').then(m=>m.renderOriginalHub());
   const knock = document.querySelector("[data-knock]");
   knock?.addEventListener("click", (event) => {
     if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey)
