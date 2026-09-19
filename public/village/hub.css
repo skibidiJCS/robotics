@@ -10,6 +10,10 @@ body.map-page{background:#adc69b;color:#435847;overflow-x:hidden}
 .world .house:hover{transform:translate(-50%,-50%);background:none}.house:hover .house-art{transform:translateY(-5px)}
 .world .house-0{left:18%;top:28%}.world .house-1{left:50%;top:16%}.world .house-2{left:82%;top:28%}.world .house-3{left:18%;top:69%}.world .house-4{left:50%;top:83%}.world .house-5{left:82%;top:69%}
 .world .house-label{position:absolute;top:auto;bottom:0;left:50%;transform:translateX(-50%) rotate(-2deg);white-space:nowrap;padding:9px 15px;background:#dfc18a;border:2px solid #745537;border-radius:8px 6px 9px 5px;box-shadow:0 3px #745537;color:#5b402a;font:700 14px Manrope,Arial;min-height:39px;display:grid;place-items:center}
+.world .house:nth-child(3n+1) .house-label{background:#e4c486}
+.world .house:nth-child(3n+2) .house-label{background:#7fc0ce;color:#174f68}
+.world .house:nth-child(3n) .house-label{background:#ed9b66;color:#663521}
+.world .house:hover .house-label{filter:brightness(1.08);box-shadow:0 4px #745537}
 .world .map-title{position:absolute;inset:auto;left:50%;top:48%;transform:translate(-50%,-50%);width:28%;padding:0;text-align:center;pointer-events:none}
 .world .map-title .centered-school-logo{display:block;width:68px;height:77px;object-fit:contain;margin:0 auto 10px;filter:none}
 .world .map-title h1{margin:0;color:#245e76;font:700 clamp(18px,2.4vw,30px)/1.2 Manrope,Arial;text-shadow:0 1px #e3efcb;letter-spacing:-.8px}
