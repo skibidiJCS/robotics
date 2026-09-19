@@ -32,3 +32,6 @@ body.village-page{display:block;background:#bad397;overflow:hidden}
 @media(max-width:700px){.village-brand{top:calc(47% - 94px);left:21%;width:58%;height:188px}.village-brand img{width:130px;height:140px}.village-brand h1{font-size:23px}}
 @media(max-height:650px) and (min-width:701px){.village-brand{height:150px;top:calc(45% - 75px)}.village-brand img{width:100px;height:105px}}
 @media(prefers-reduced-motion:reduce){.village-label{transition:none!important;transform:none!important}}
+
+.village-house:hover .house-art,.village-house:focus-visible .house-art{transform:translate(var(--shift,0px),-7px) rotate(var(--lean,0deg)) scale(1.025)}
+.village-house:hover .village-label,.village-house:focus-visible .village-label{transform:translate(calc(var(--shift,0px) * -.4),-5px) rotate(calc(var(--lean,0deg) * -.8)) scale(1.04);background:#fff0cb}

@@ -27,3 +27,19 @@ assert.equal(combo.score,450);assert(combo.remaining>73);
 const top=createGame();top.phase='explore';top.player.x=650;top.player.y=bounds.top;
 step(top,{x:0,y:-1},.05);assert.equal(top.player.y,bounds.top);
 console.log('PASS: easy default, single-contact shield, re-contact death, paused and telegraphed acorns, one penalty per impact, rescue streak and top limit.');
+
+// Regression: staying in contact after consuming a shield must not grant immortality,
+// including when an acorn lands at the same location.
+const camping=createGame('easy');camping.phase='playing';camping.protection=1;camping.powers=[];
+camping.cats[0].x=camping.player.x;camping.cats[0].y=camping.player.y;
+camping.hazards=[{x:camping.player.x,y:camping.player.y,impactAt:.5,hit:false}];
+step(camping,{x:0,y:0},.01);assert.equal(camping.protection,0);
+for(let i=0;i<100&&camping.phase==='playing';i++)step(camping,{x:0,y:0},.02);
+assert.equal(camping.reason,'caught');assert(camping.elapsed<1.5);
+const late=createGame('hard');late.phase='playing';late.cats=[];late.powers=[];late.elapsed=140;late.nextHazard=200;
+late.player.x=late.friends[0].x;late.player.y=late.friends[0].y;const clock=late.remaining;
+step(late,{x:0,y:0},.01);assert(Math.abs(late.remaining-clock-.99)<.001);
+const burst=createGame('hard');burst.phase='playing';burst.elapsed=9;burst.remaining=200;burst.powers=[];
+burst.player.x=1000;burst.player.y=800;step(burst,{x:0,y:0},.01);assert(burst.cats[0].crouching);
+burst.elapsed=9.9;step(burst,{x:0,y:0},.01);assert(burst.cats[0].pouncing);
+console.log('PASS: camping cat kills after shield stun, acorns do not suppress contact, late-run time bonuses shrink, pounce is telegraphed.');
