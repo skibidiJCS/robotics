@@ -4,6 +4,8 @@ import {createGame,step,catSpeed,BOOST_SPEED,CAT_MAX_SPEED,blocked,routeTo} from
 const chase=createGame('hard');chase.phase='playing';chase.remaining=1000;chase.protection=1000;
 const startingSpeed=catSpeed(chase);let differentPlans=0;
 for(let frame=0;frame<7200;frame++){
+ // This soak test isolates pursuit; contact behaviour is tested separately.
+ for(const cat of chase.cats)cat.contactBlocked=true;
  const angle=frame/130;
  const previous=chase.cats.map(c=>({x:c.x,y:c.y}));
  step(chase,{x:Math.cos(angle),y:Math.sin(angle)},1/60);

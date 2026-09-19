@@ -7,6 +7,7 @@ async function navigate(href, { replace = false, pop = false } = {}) {
     return;
   }
   const target = new URL(href, location.href);
+  if(target.pathname.split('/')[1]!==location.pathname.split('/')[1]){try{localStorage.setItem('smurf-language',target.pathname.split('/')[1]);}catch{}}
   const version = ++navigationVersion;
   try {
     let html = pageCache.get(target.href);

@@ -1,6 +1,7 @@
 import './test-roam.mjs';
 import './test-leaderboard.mjs';
 import './test-chase.mjs';
+import './test-game-challenges.mjs';
 import './test-cloud-leaderboard.mjs';
 import assert from 'node:assert/strict';
 import {readFile,readdir,stat} from 'node:fs/promises';

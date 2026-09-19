@@ -14,10 +14,10 @@ function nearEdge(x,y,a,b,r){const dx=b.x-a.x,dy=b.y-a.y,t=Math.max(0,Math.min(1
 const spots=[[620,660],[1000,390],[1000,815],[310,770],[690,820],[1050,570],[680,350],[730,580],[290,380],[340,570],[540,830],[730,440]];
 export const PLAYER_SPEED=270,BOOST_SPEED=400,CAT_MAX_SPEED=335;
 export const powerSpots=[[250,460],[425,335],[750,320],[1030,490],[1040,755],[760,835],[345,835],[665,570],[310,655],[930,335]];
-export const modes={easy:{cats:1,cat:105,cap:260,ramp:.8,boost:1.08},medium:{cats:1,cat:140,cap:300,ramp:1.1,boost:1},hard:{cats:2,cat:185,cap:CAT_MAX_SPEED,ramp:1.5,boost:1}};
-export function createGame(mode='medium'){
- const settings=modes[mode]||modes.medium;mode=modes[mode]?mode:'medium';
- return {mode,settings,phase:'ready',player:{x:650,y:770,facing:1,walk:0,vx:0,dx:0,dy:0},cats:[[270,310],[1080,340]].slice(0,settings.cats).map(([x,y],id)=>({id,x,y,facing:1,route:[],repath:0})),boost:0,protection:0,powers:powerSpots.map(([x,y],i)=>({x,y,type:[1,5,9].includes(i)?'shield':'speed',readyAt:i===8?5:i===9?9:0})),remaining:60,score:0,found:0,elapsed:0,next:3,reason:null,friends:spots.slice(0,3).map(([x,y],id)=>({id,x,y})),target:null,route:[]};
+export const modes={easy:{cats:1,cat:105,cap:260,ramp:.8,boost:1.12,acornEvery:11,acorns:1,warning:2,penalty:2},medium:{cats:1,cat:135,cap:295,ramp:1,boost:1,acornEvery:8,acorns:2,warning:1.7,penalty:3},hard:{cats:2,cat:175,cap:CAT_MAX_SPEED,ramp:1.3,boost:1,acornEvery:6,acorns:3,warning:1.4,penalty:4}};
+export function createGame(mode='easy'){
+ const settings=modes[mode]||modes.easy;mode=modes[mode]?mode:'easy';
+ return {mode,settings,phase:'ready',player:{x:650,y:770,facing:1,walk:0,vx:0,dx:0,dy:0},cats:[[270,310],[1080,340]].slice(0,settings.cats).map(([x,y],id)=>({id,x,y,facing:1,route:[],repath:0})),boost:0,protection:0,hazards:[],nextHazard:8,streak:0,streakUntil:0,powers:powerSpots.map(([x,y],i)=>({x,y,type:[1,5,9].includes(i)?'shield':'speed',readyAt:i===8?5:i===9?9:0})),remaining:60,score:0,found:0,elapsed:0,next:3,reason:null,friends:spots.slice(0,3).map(([x,y],id)=>({id,x,y})),target:null,route:[]};
 }
 export const catSpeed=s=>Math.min(s.settings.cap,s.settings.cat+s.elapsed*s.settings.ramp+s.score*.018);
 export const cats=s=>s.cats;
@@ -25,11 +25,13 @@ export function blocked(x,y,r=18){return x<bounds.left||x>bounds.right||y<bounds
 function clearLine(a,b){const n=Math.ceil(Math.hypot(a.x-b.x,a.y-b.y)/8);for(let i=1;i<=n;i++)if(blocked(a.x+(b.x-a.x)*i/n,a.y+(b.y-a.y)*i/n))return false;return true;}
 export function routeTo(a,b){if(blocked(b.x,b.y))return [];if(clearLine(a,b))return [b];const nodes=[a,b];for(const o of obstacles)for(let i=0;i<16;i++){const a=i*Math.PI/8;nodes.push({x:o.x+Math.cos(a)*(o.r+26),y:o.y+Math.sin(a)*(o.r+26)});}const cost=nodes.map(()=>Infinity),prev=[],visited=new Set();cost[0]=0;for(let k=0;k<nodes.length;k++){let u=-1;for(let i=0;i<nodes.length;i++)if(!visited.has(i)&&(u<0||cost[i]<cost[u]))u=i;if(u<0||cost[u]===Infinity)break;if(u===1){const path=[];let v=1,guard=0;while(v!==0&&guard++<nodes.length){path.unshift(nodes[v]);v=prev[v];}return v===0?path:[];}visited.add(u);for(let v=0;v<nodes.length;v++)if(!visited.has(v)&&clearLine(nodes[u],nodes[v])){const next=cost[u]+Math.hypot(nodes[u].x-nodes[v].x,nodes[u].y-nodes[v].y);if(next<cost[v]){cost[v]=next;prev[v]=u;}}}return [];}
 function move(p,x,y,distance){const n=Math.hypot(x,y);if(!n)return;const dx=x/n*distance,dy=y/n*distance,ox=p.x,oy=p.y;const nx=Math.max(bounds.left,Math.min(bounds.right,p.x+dx)),ny=Math.max(bounds.top,Math.min(bounds.bottom,p.y+dy));if(!blocked(nx,p.y))p.x=nx;if(!blocked(p.x,ny))p.y=ny;const moved=Math.hypot(p.x-ox,p.y-oy);p.walk=(p.walk||0)+moved;p.vx=moved>.1?100:0;if(Math.abs(x)>.03)p.facing=x<0?-1:1;}
-export function step(s,axes,dt){if(!['playing','explore'].includes(s.phase)||!Number.isFinite(dt)||dt<=0)return [];const playing=s.phase==='playing',events=[];if(playing){s.remaining=Math.max(0,s.remaining-dt);s.elapsed+=dt;s.boost=Math.max(0,s.boost-dt);s.protection=Math.max(0,s.protection-dt);if(!s.remaining){s.phase='ended';s.reason='time';s.player.vx=0;return ['end'];}}
+export function step(s,axes,dt){if(!['playing','explore'].includes(s.phase)||!Number.isFinite(dt)||dt<=0)return [];const playing=s.phase==='playing',events=[];if(playing){s.remaining=Math.max(0,s.remaining-dt);s.elapsed+=dt;s.boost=Math.max(0,s.boost-dt);if(!s.remaining){s.phase='ended';s.reason='time';s.player.vx=0;return ['end'];}}
  const delta=Math.min(dt,.05),p=s.player;let x=axes.x,y=axes.y;if(Math.hypot(x,y)>.03){s.target=null;s.route=[];}else if(s.target){if(!s.route.length)s.route=routeTo(p,s.target);const goal=s.route[0];if(goal){x=goal.x-p.x;y=goal.y-p.y;if(Math.hypot(x,y)<5){s.route.shift();if(!s.route.length)s.target=null;}}else s.target=null;}
  const before={x:p.x,y:p.y};p.vx=0;const speed=s.boost>0?BOOST_SPEED:PLAYER_SPEED;move(p,x,y,s.target?Math.min(speed*delta,Math.hypot(x,y)):speed*delta);p.dx=(p.x-before.x)/delta;p.dy=(p.y-before.y)/delta;if(!playing)return events;
- for(const power of s.powers)if(power.readyAt<=s.elapsed&&Math.hypot(power.x-p.x,power.y-p.y)<32){power.readyAt=s.elapsed+(power.type==='speed'?10:17);if(power.type==='speed')s.boost=3.4*s.settings.boost;else s.protection=3.5;events.push(power.type);}
+ for(const power of s.powers)if(power.readyAt<=s.elapsed&&Math.hypot(power.x-p.x,power.y-p.y)<32){power.readyAt=s.elapsed+(power.type==='speed'?10:17);if(power.type==='speed')s.boost=3.4*s.settings.boost;else s.protection=1;events.push(power.type);}
  for(const cat of s.cats){
+  cat.stun=Math.max(0,(cat.stun||0)-delta);
+  if(cat.stun)continue;
   cat.repath-=delta;
   if(cat.repath<=0){
    let target={x:p.x,y:p.y};
@@ -55,7 +57,30 @@ export function step(s,axes,dt){if(!['playing','explore'].includes(s.phase)||!Nu
    for(const [dx,dy] of directions){const proposal={...cat};move(proposal,dx,dy,distance);if(peers.every(other=>Math.hypot(proposal.x-other.x,proposal.y-other.y)>=52)){Object.assign(cat,proposal);break;}}
   }
  }
- for(const cat of s.cats)if(s.protection<=0&&Math.hypot(cat.x-p.x,cat.y-p.y)<32){s.phase='ended';s.reason='caught';s.player.vx=0;s.target=null;return ['end'];}
- for(const f of s.friends)if(Math.hypot(f.x-p.x,f.y-p.y)<35){s.found++;s.score+=100;s.remaining+=4;events.push('found');let point;for(let i=0;i<spots.length;i++){point=spots[s.next++%spots.length];if(Math.hypot(point[0]-p.x,point[1]-p.y)>240&&!s.friends.some(o=>o!==f&&Math.hypot(point[0]-o.x,point[1]-o.y)<100))break;}[f.x,f.y]=point;}return events;}
+ for(const cat of s.cats){
+  const distance=Math.hypot(cat.x-p.x,cat.y-p.y);
+  if(distance>52)cat.contactBlocked=false;
+  if(distance<32&&!cat.contactBlocked){
+   if(s.protection){s.protection=0;cat.contactBlocked=true;cat.stun=1.2;events.push('shieldUsed');}
+   else{s.phase='ended';s.reason='caught';s.player.vx=0;s.target=null;return ['end'];}
+  }
+ }
+ if(s.elapsed>=s.nextHazard){
+  s.nextHazard=s.elapsed+s.settings.acornEvery;
+  for(let i=0;i<s.settings.acorns;i++){
+   const angle=s.elapsed*.7+i*2.4;
+   const x=Math.max(bounds.left+42,Math.min(bounds.right-42,p.x+(i?Math.cos(angle)*125:0)));
+   const y=Math.max(bounds.top+42,Math.min(bounds.bottom-42,p.y+(i?Math.sin(angle)*125:0)));
+   if(!blocked(x,y,42))s.hazards.push({x,y,impactAt:s.elapsed+s.settings.warning,hit:false});
+  }
+ }
+ for(const hazard of s.hazards)if(!hazard.hit&&s.elapsed>=hazard.impactAt){
+  hazard.hit=true;
+  if(Math.hypot(hazard.x-p.x,hazard.y-p.y)<43){s.remaining=Math.max(0,s.remaining-s.settings.penalty);s.streak=0;events.push('acornHit');}
+ }
+ s.hazards=s.hazards.filter(h=>s.elapsed<h.impactAt+.6);
+ if(!s.remaining){s.phase='ended';s.reason='time';s.player.vx=0;return ['end'];}
+
+ for(const f of s.friends)if(Math.hypot(f.x-p.x,f.y-p.y)<35){s.streak=s.elapsed<=s.streakUntil?s.streak+1:1;s.streakUntil=s.elapsed+8;if(s.streak%3===0){s.score+=150;s.remaining+=2;}s.found++;s.score+=100;s.remaining+=4;events.push('found');if(s.streak%3===0)events.push('combo');let point;for(let i=0;i<spots.length;i++){point=spots[s.next++%spots.length];if(Math.hypot(point[0]-p.x,point[1]-p.y)>240&&!s.friends.some(o=>o!==f&&Math.hypot(point[0]-o.x,point[1]-o.y)<100))break;}[f.x,f.y]=point;}return events;}
 const keys={ArrowLeft:[-1,0],KeyA:[-1,0],KeyQ:[-1,0],ArrowRight:[1,0],KeyD:[1,0],ArrowUp:[0,-1],KeyW:[0,-1],KeyZ:[0,-1],ArrowDown:[0,1],KeyS:[0,1]};
 export function createControls(){const held=new Map();let order=0,touch={x:0,y:0};return {press(code){if(!keys[code])return false;if(!held.has(code))held.set(code,{axes:keys[code],order:++order});return true;},release(code){return held.delete(code);},touch(x,y){touch={x,y};},axes(){if(Math.hypot(touch.x,touch.y)>.05)return touch;let x=0,y=0,xOrder=0,yOrder=0;for(const h of held.values()){if(h.axes[0]&&h.order>xOrder){x=h.axes[0];xOrder=h.order;}if(h.axes[1]&&h.order>yOrder){y=h.axes[1];yOrder=h.order;}}return {x,y};},clear(){held.clear();touch={x:0,y:0};}};}
