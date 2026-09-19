@@ -14,10 +14,14 @@ export function renderOriginalHub(){
   roads.setAttribute('viewBox',`0 0 ${w} ${h}`);
   const stroke=phone?19:Math.min(38,w*.028),doors=[];
   for(const house of scene.querySelectorAll('.village-house')){const b=house.getBoundingClientRect(),art=house.querySelector('svg');doors.push({x:b.left-rect.left+b.width*.5,y:b.top-rect.top+art.clientHeight*.9});}
-  const nodes=[1,2,5,4,3,0].map(i=>({x:doors[i].x,y:Math.min(h-10,doors[i].y+(phone?18:28))}));
+  const front=i=>({x:doors[i].x,y:Math.min(h-10,doors[i].y+(phone?18:28))});
+  // The western lane has its own alignment, outside the robot house footprint.
+  const westX=w*(phone?.075:.10),robotFront=front(3);
+  const nodes=[front(1),front(2),front(5),front(4),{x:westX,y:robotFront.y+12},{x:westX,y:doors[3].y-h*.23},front(0)];
   let ring=`M${nodes[0].x} ${nodes[0].y}`;
-  for(let i=0;i<nodes.length;i++){const a=nodes[(i+5)%6],b=nodes[i],c=nodes[(i+1)%6],d=nodes[(i+2)%6];ring+=` C${b.x+(c.x-a.x)/8} ${b.y+(c.y-a.y)/8} ${c.x-(d.x-b.x)/8} ${c.y-(d.y-b.y)/8} ${c.x} ${c.y}`;}
-  let paths=doors.map(d=>`M${d.x} ${d.y}V${Math.min(h-10,d.y+(phone?18:28))}`).join(' ');
+  const count=nodes.length;
+  for(let i=0;i<count;i++){const a=nodes[(i+count-1)%count],b=nodes[i],c=nodes[(i+1)%count],d=nodes[(i+2)%count];ring+=` C${b.x+(c.x-a.x)/10} ${b.y+(c.y-a.y)/10} ${c.x-(d.x-b.x)/10} ${c.y-(d.y-b.y)/10} ${c.x} ${c.y}`;}
+  let paths=doors.map((d,i)=>i===3?`M${d.x} ${d.y}L${robotFront.x} ${robotFront.y}Q${westX+30} ${robotFront.y} ${westX} ${robotFront.y+12}`:`M${d.x} ${d.y}V${front(i).y}`).join(' ');
   const bridge={x:w*(phone?89/500:215/1400),y:h*(phone?765/900:745/900)},near=nodes[4];
   paths+=` M${near.x} ${near.y}C${near.x} ${near.y+30} ${bridge.x+20} ${bridge.y-35} ${bridge.x} ${bridge.y}`;
   roads.innerHTML=`<path d="${ring}Z ${paths}" fill="none" stroke="#e8d6a5" stroke-width="${stroke}" stroke-linecap="round" stroke-linejoin="round"/>`;
