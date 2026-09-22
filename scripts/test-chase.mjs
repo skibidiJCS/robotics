@@ -24,7 +24,8 @@ rescue.player.x=650;rescue.player.y=850;rescue.cats[0].x=610;rescue.cats[0].y=85
 const gap=rescue.player.x-rescue.cats[0].x;
 for(let i=0;i<60;i++)step(rescue,{x:1,y:0},1/60);
 assert.equal(rescue.phase,'playing');assert(rescue.player.x-rescue.cats[0].x>gap+40,'Boost opens a real escape gap against maximum-speed pursuit');
-const powers=createGame('hard');assert.equal(powers.powers.length,10);assert(powers.powers.filter(p=>p.readyAt===0).length<=8);
+const powers=createGame('hard');assert.equal(powers.powers.length,7);assert(powers.powers.every(p=>p.type==='speed'));
+for(const mode of ['easy','medium'])assert(createGame(mode).powers.some(p=>p.type==='shield'));
 for(const power of powers.powers){assert(!blocked(power.x,power.y));assert(routeTo(powers.player,power).length);}
 const pickup=powers.powers.find(p=>p.type==='speed');powers.phase='playing';powers.player.x=pickup.x;powers.player.y=pickup.y;step(powers,{x:0,y:0},.01);assert(pickup.readyAt>powers.elapsed+9);const deadline=pickup.readyAt;
 powers.player.x=650;powers.player.y=850;powers.elapsed=deadline+.1;assert(pickup.readyAt<=powers.elapsed,'Mushrooms return throughout long runs');

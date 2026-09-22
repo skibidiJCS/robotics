@@ -1,5 +1,6 @@
 import {drawSmurf} from './art.js';
 import {drawCat} from './cat-art.js';
+export const speedMushroomIcon=()=>`<svg class="instruction-drawing" viewBox="0 0 60 70" role="img" aria-label="Blue speed mushroom"><path d="M25 39v23h10V39" fill="#f6e5b7" stroke="#6d6543" stroke-width="2"/><path d="M7 41C7 8 51 8 53 41Q30 51 7 41Z" fill="#368eae" stroke="#28617a" stroke-width="2"/><g fill="#fff0c6" stroke="none"><circle cx="20" cy="29" r="5"/><circle cx="38" cy="25" r="5"/></g></svg>`;
 const spriteCache=new Map();
 export function smurfIcon(hero=false){
  if(!spriteCache.has(hero)){

@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import {createGame,step,bounds} from '../public/village/roam-state.js';
+import {createGame,step,bounds,rescueBonus} from '../public/village/roam-state.js';
 assert.equal(createGame().mode,'easy');
 const shield=createGame();shield.phase='playing';shield.powers=[];shield.protection=1;
 shield.cats[0].x=shield.player.x;shield.cats[0].y=shield.player.y;
@@ -38,7 +38,15 @@ for(let i=0;i<100&&camping.phase==='playing';i++)step(camping,{x:0,y:0},.02);
 assert.equal(camping.reason,'caught');assert(camping.elapsed<1.5);
 const late=createGame('hard');late.phase='playing';late.cats=[];late.powers=[];late.elapsed=140;late.nextHazard=200;
 late.player.x=late.friends[0].x;late.player.y=late.friends[0].y;const clock=late.remaining;
-step(late,{x:0,y:0},.01);assert(Math.abs(late.remaining-clock-.99)<.001);
+step(late,{x:0,y:0},.01);assert(Math.abs(late.remaining-clock+.01)<.001);
+const hard=createGame('hard');hard.phase='playing';hard.cats=[];hard.powers=[];hard.nextHazard=200;
+for(const [elapsed,bonus] of [[0,2],[35,1],[70,0]]){hard.elapsed=elapsed;assert.equal(rescueBonus(hard),bonus);}
+hard.elapsed=0;
+for(let i=0;i<30;i++){hard.player.x=hard.friends[0].x;hard.player.y=hard.friends[0].y;step(hard,{x:0,y:0},.01);}
+assert.equal(hard.timeBonusEarned,30);assert(hard.remaining<=90-hard.elapsed+.001,'Streaks cannot bypass the Hard time cap');
+const unshielded=createGame('hard');unshielded.phase='playing';unshielded.protection=1;
+unshielded.cats[0].x=unshielded.player.x;unshielded.cats[0].y=unshielded.player.y;
+step(unshielded,{x:0,y:0},.01);assert.equal(unshielded.reason,'caught');
 const burst=createGame('hard');burst.phase='playing';burst.elapsed=9;burst.remaining=200;burst.powers=[];
 burst.player.x=1000;burst.player.y=800;step(burst,{x:0,y:0},.01);assert(burst.cats[0].crouching);
 burst.elapsed=9.9;step(burst,{x:0,y:0},.01);assert(burst.cats[0].pouncing);

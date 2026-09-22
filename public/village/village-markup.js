@@ -1,3 +1,9 @@
+export function bridgeArt(phone=false){
+ const half=phone?58:69,width=phone?18:26,bow=phone?12:18,id=phone?'bridge-mobile':'bridge-desktop';
+ const deck=`M${-width} ${-half}Q${-width-2*bow} 0 ${-width} ${half}L${width} ${half}Q${width-2*bow} 0 ${width} ${-half}Z`;
+ const planks=Array.from({length:8},(_,i)=>{const y=-half+(i+1)*half*2/9;return `<path d="M${-width-bow-5} ${y}H${width+5}"/>`;}).join('');
+ return `<g transform="${phone?'translate(57 813) rotate(34)':'translate(175 800) rotate(36)'}"><defs><clipPath id="${id}"><path d="${deck}"/></clipPath></defs><path d="${deck}" fill="#c99f64" stroke="#806442" stroke-width="2"/><g clip-path="url(#${id})" fill="none" stroke="#a57c49" stroke-width="${phone?1.4:2}">${planks}</g><path d="M${-width} ${-half}Q${-width-2*bow} 0 ${-width} ${half}M${width} ${-half}Q${width-2*bow} 0 ${width} ${half}" fill="none" stroke="#785a39" stroke-width="${phone?2.5:3.5}"/></g>`;
+}
 // Separate vector buildings let the scenery resize without stretching the houses.
 export function houseArt(index) {
  const red=[0,2,4].includes(index),cap=red?'#df5947':'#398fbd',shade=red?'#b94236':'#2677a5';
@@ -26,8 +32,7 @@ export function villageBackground(){return `<svg class="village-scenery desktop-
  <path fill="url(#meadow)" d="M0 0h1400v900H0Z"/>
  <path d="M140 0 175 74 241 40 308 96 405 35 478 85 554 0M900 0l86 69 82-50 65 90 125-67 40-42" fill="#a8b7a1" opacity=".6"/>
  <path d="M-70 696C100 688 81 802 240 814S368 951 574 935M1504 427Q1303 450 1350 575Q1378 624 1480 661" fill="none" stroke="#89a882" stroke-width="69"/><path d="M-70 696C100 688 81 802 240 814S368 951 574 935M1504 427Q1303 450 1350 575Q1378 624 1480 661" fill="none" stroke="#75b7c6" stroke-width="52"/><path d="M-20 698Q58 696 82 749M244 814Q312 827 340 870M1389 465Q1342 485 1357 522" fill="none" stroke="#c8e6d9" stroke-width="4"/>
- <path d="M215 745L135 855Q112 887 100 930" fill="none" stroke="#e8d6a5" stroke-width="42"/>
- <g transform="translate(175 800) rotate(36)"><path d="M-26 -69Q-62 0 -26 69L26 69Q-10 0 26 -69Z" fill="#c99f64" stroke="#806442" stroke-width="2"/><path d="M-31.716446124763706 -57h52" stroke="#a57c49" stroke-width="2"/><path d="M-37.33081285444234 -42h52" stroke="#a57c49" stroke-width="2"/><path d="M-41.24385633270322 -27h52" stroke="#a57c49" stroke-width="2"/><path d="M-43.455576559546316 -12h52" stroke="#a57c49" stroke-width="2"/><path d="M-43.965973534971646 3h52" stroke="#a57c49" stroke-width="2"/><path d="M-42.77504725897921 18h52" stroke="#a57c49" stroke-width="2"/><path d="M-39.882797731569 33h52" stroke="#a57c49" stroke-width="2"/><path d="M-35.28922495274102 48h52" stroke="#a57c49" stroke-width="2"/><path d="M-28.994328922495278 63h52" stroke="#a57c49" stroke-width="2"/><path d="M-26 -69Q-62 -8 -26 69M26 -69Q-10 -8 26 69" fill="none" stroke="#785a39" stroke-width="4"/></g>
+ <path d="M135 855Q112 887 100 930" fill="none" stroke="#e8d6a5" stroke-width="42"/>
 
 
  <use href="#tree" transform="translate(64 50) scale(1.25)"/><use href="#tree" transform="translate(1360 44) scale(1.3)"/><use href="#tree" transform="translate(35 422) scale(.85)"/>
@@ -35,8 +40,7 @@ export function villageBackground(){return `<svg class="village-scenery desktop-
  <g fill="#fff0c5"><circle cx="125" cy="583" r="5"/><circle cx="121" cy="667" r="5"/><circle cx="1057" cy="761" r="5"/><circle cx="1019" cy="749" r="4"/><circle cx="407" cy="142" r="4"/><circle cx="1150" cy="397" r="5"/></g></svg><svg class="village-scenery mobile-scenery" viewBox="0 0 500 900" preserveAspectRatio="none" aria-hidden="true">
  <path fill="#c4d8a1" d="M0 0h500v900H0Z"/>
  <path d="M-30 698Q93 724 42 821Q23 866 157 924M542 487Q454 479 490 563Q516 609 557 610" fill="none" stroke="#8baa7d" stroke-width="48"/><path d="M-30 698Q93 724 42 821Q23 866 157 924M542 487Q454 479 490 563Q516 609 557 610" fill="none" stroke="#75b7c6" stroke-width="35"/>
- <path d="M89 765L25 861Q15 893 35 925" fill="none" stroke="#e8d6a5" stroke-width="29"/>
- <g transform="translate(57 813) rotate(34)"><path d="M-18 -58Q-42 0 -18 58L18 58Q-6 0 18 -58Z" fill="#c99f64" stroke="#806442" stroke-width="2"/><path d="M-22.451843043995243 -46h36" stroke="#a57c49" stroke-width="2"/><path d="M-26.571938168846614 -31h36" stroke="#a57c49" stroke-width="2"/><path d="M-29.08680142687277 -16h36" stroke="#a57c49" stroke-width="2"/><path d="M-29.99643281807372 -1h36" stroke="#a57c49" stroke-width="2"/><path d="M-29.300832342449464 14h36" stroke="#a57c49" stroke-width="2"/><path d="M-27.0 29h36" stroke="#a57c49" stroke-width="2"/><path d="M-23.09393579072533 44h36" stroke="#a57c49" stroke-width="2"/><path d="M-18 -58Q-42 -8 -18 58M18 -58Q-6 -8 18 58" fill="none" stroke="#785a39" stroke-width="4"/></g>
+ <path d="M25 861Q15 893 35 925" fill="none" stroke="#e8d6a5" stroke-width="29"/>
 
 
  <svg x="-55" y="-30" width="160" height="245" viewBox="-125 -100 260 310" preserveAspectRatio="xMidYMid meet"><use href="#tree"/></svg><svg x="400" y="-25" width="160" height="245" viewBox="-125 -100 260 310" preserveAspectRatio="xMidYMid meet"><use href="#tree"/></svg><svg x="-85" y="332" width="145" height="215" viewBox="-125 -100 260 310" preserveAspectRatio="xMidYMid meet"><use href="#tree"/></svg>
