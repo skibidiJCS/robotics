@@ -13,7 +13,7 @@ export function schoolName(value){
  return banned.test(folded)||banned.test(short)||/^(ass|fag|damn)$/.test(folded)?'Player':name;
 }
 export function scoreEntry(value){
- if(value?.mode!=='hard'||!Number.isSafeInteger(value.score)||value.score<0||value.score>1000000||value.score%100||typeof value.id!=='string'||! /^[a-f0-9-]{36}$/.test(value.id))throw new Error('Invalid score');
+ if(value?.mode!=='hard'||!Number.isSafeInteger(value.score)||value.score<0||value.score>1000000||value.score%50||typeof value.id!=='string'||! /^[a-f0-9-]{36}$/.test(value.id))throw new Error('Invalid score');
  return {id:value.id,name:schoolName(value.name),score:value.score,mode:'hard',date:Date.now()};
 }
 export const topScores=rows=>rows.filter(r=>r.mode==='hard').sort((a,b)=>b.score-a.score||a.date-b.date).slice(0,20).map(({name,score})=>({name,score}));

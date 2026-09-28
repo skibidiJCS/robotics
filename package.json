@@ -15,6 +15,7 @@
     "linkedom": "^0.18.13"
   },
   "dependencies": {
-    "@vercel/blob": "^2.8.0"
+    "@vercel/blob": "^2.8.0",
+    "three": "0.180.0"
   }
 }
