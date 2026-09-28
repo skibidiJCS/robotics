@@ -3,11 +3,12 @@ import {mkdtemp,rm} from 'node:fs/promises';
 import {tmpdir} from 'node:os';
 import {join} from 'node:path';
 import {randomUUID} from 'node:crypto';
-import {schoolName,leaderboardStore} from './leaderboard.mjs';
+import {schoolName,leaderboardStore,scoreEntry} from './leaderboard.mjs';
 
 for(const name of ['Smurfy','Élodie','Sigma','Skibidi Rizz','Ohio','Player 42'])assert.equal(schoolName(name),name);
 for(const name of ['',null,'fuck','F_U_C_K','fuuuck','sh1t','b1tch','p u t a i n','tabarnak','porn','nazi','kill yourself','<script>alert(1)</script>','a'.repeat(21),'fυck'])assert.equal(schoolName(name),'Player',String(name));
 const directory=await mkdtemp(join(tmpdir(),'smurf-scores-'));
+assert.equal(scoreEntry({id:randomUUID(),name:'Player',score:450,mode:'hard'}).score,450,'Three rescues plus streak bonus is valid');
 try{
  const file=join(directory,'scores.json'),store=leaderboardStore(file);
  const row={id:randomUUID(),name:'Skibidi',score:500,mode:'hard'};

@@ -20,7 +20,7 @@ for(let frame=0;frame<7200;frame++){
 assert(catSpeed(chase)>startingSpeed);assert(catSpeed(chase)<=CAT_MAX_SPEED);assert(CAT_MAX_SPEED<BOOST_SPEED);assert(differentPlans>600,'The flanker repeatedly takes a separate approach');
 chase.elapsed=100000;chase.score=100000;assert.equal(catSpeed(chase),CAT_MAX_SPEED);
 const rescue=createGame('hard');rescue.phase='playing';rescue.elapsed=10000;rescue.remaining=100;
-rescue.player.x=650;rescue.player.y=850;rescue.cats[0].x=610;rescue.cats[0].y=850;rescue.cats[1].x=250;rescue.cats[1].y=310;rescue.boost=2;
+rescue.player.x=650;rescue.player.y=990;rescue.cats[0].x=610;rescue.cats[0].y=990;rescue.cats[1].x=250;rescue.cats[1].y=310;rescue.boost=2;
 const gap=rescue.player.x-rescue.cats[0].x;
 for(let i=0;i<60;i++)step(rescue,{x:1,y:0},1/60);
 assert.equal(rescue.phase,'playing');assert(rescue.player.x-rescue.cats[0].x>gap+40,'Boost opens a real escape gap against maximum-speed pursuit');

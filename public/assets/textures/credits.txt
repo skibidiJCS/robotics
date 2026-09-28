@@ -1,0 +1,6 @@
+CC0 textures from Poly Haven, downloaded for local use.
+forest-ground.jpg / forest-normal.jpg: https://polyhaven.com/a/leafy_grass
+bark.jpg: https://polyhaven.com/a/bark_brown_01
+plaster.jpg: https://polyhaven.com/a/rough_plaster_03
+leaves.jpg / leaves-alpha.png: https://polyhaven.com/a/island_tree_03
+forest-light.hdr: https://polyhaven.com/a/spruit_sunrise
