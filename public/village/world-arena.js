@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import { arenaFurniture, ARENA_RADIUS } from './arena-layout.js';
-import { mesh, ball, block, branch, material } from './world-models.js';
+import { mesh, ball, block, branch, material, mergeScenery } from './world-models.js';
 import { bookshelf, createDisplay, table } from './world-furniture.js';
 
 export function createArena(textures) {
@@ -70,6 +70,7 @@ export function createArena(textures) {
    mesh(pot, new THREE.TorusGeometry(.8, .07, 8, 24), '#e6bc7c', [0, .42, 0]).rotation.x = Math.PI / 2;
    for (let i = 0; i < 3; i++) {
     const steam = ball(corner, material('#f2ecd4', { transparent: true, opacity: .22, depthWrite: false }), [1.8, 3.6 + i * .5, 0], [.2, .32, .2]);
+    steam.userData.batchRoot = true;
     displays.push({ animate(time) { steam.position.y = 3.3 + ((time * .5 + i * .65) % 2); steam.scale.setScalar(.18 + (steam.position.y - 3.3) * .18); } });
    }
   } else {
@@ -78,5 +79,6 @@ export function createArena(textures) {
   }
  }
  const lamp = new THREE.PointLight('#ffe0ab', 150, 65, 2); lamp.position.set(0, 9, 0); group.add(lamp);
+ mergeScenery(group);
  return { group, animate(time) { displays.forEach(display => display.animate(time)); } };
 }

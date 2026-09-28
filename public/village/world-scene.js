@@ -1,35 +1,13 @@
 import * as THREE from 'three';
-import { mergeGeometries } from '/vendor/BufferGeometryUtils.js';
 import { HDRLoader } from '/vendor/HDRLoader.js';
 import { obstacles, routeTo } from './roam-state.js';
 import { places, toWorld, toGame } from './world-data.js';
-import { random, material, mesh, ball, branch, noiseTexture, smurf, cat, mushroom, house, exhibit } from './world-models.js';
+import { random, material, mesh, ball, branch, mergeScenery, noiseTexture, smurf, cat, mushroom, house, exhibit } from './world-models.js';
 import { createPond } from './world-pond.js';
 import { arena } from './arena-layout.js';
 import { createArena } from './world-arena.js';
 import { meadowTexture, plantGarden } from './world-garden.js';
 import { createInterior, ROOM_LIMIT } from './world-interior.js';
-
-function mergeScenery(scene) {
-  scene.updateMatrixWorld(true);
-  const batches = new Map();
-  scene.traverse(object => {
-    if (!object.isMesh || object.isInstancedMesh || object.isWater) return;
-    const key = `${object.material.uuid}:${object.castShadow}:${!!object.geometry.index}:${Object.keys(object.geometry.attributes).sort().join(',')}`;
-    if (!batches.has(key)) batches.set(key, []);
-    batches.get(key).push(object);
-  });
-  for (const objects of batches.values()) {
-    if (objects.length < 2) continue;
-    const parts = objects.map(object => object.geometry.clone().applyMatrix4(object.matrixWorld));
-    const geometry = mergeGeometries(parts);
-    if (geometry) {
-      const merged = mesh(scene, geometry, objects[0].material); merged.castShadow = objects[0].castShadow;
-      objects.forEach(object => object.removeFromParent());
-    }
-    parts.forEach(part => part.dispose());
-  }
-}
 
 export async function createWorld(canvas) {
   const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, powerPreference: 'high-performance' });
@@ -149,6 +127,15 @@ export async function createWorld(canvas) {
   scene.add(village);
   const interior = createInterior(textures), chaseHouse = createArena(textures); scene.add(interior.group, chaseHouse.group);
   const player = smurf(true); scene.add(player);
+  const reflect = water.onBeforeRender, reflectionCamera = new THREE.Matrix4(), reflectionProjection = new THREE.Matrix4(), reflectionPlayer = new THREE.Matrix4();
+  let reflectedAt = -Infinity;
+  water.onBeforeRender = function(renderer, scene, camera) {
+    const now = performance.now();
+    // ponytail: reflections run at most 15 Hz; raise if fast camera motion needs it.
+    if (now - reflectedAt < 1000 / 15 || (reflectionCamera.equals(camera.matrixWorld) && reflectionProjection.equals(camera.projectionMatrix) && reflectionPlayer.equals(player.matrixWorld))) return;
+    reflect.call(this, renderer, scene, camera);
+    reflectedAt = now; reflectionCamera.copy(camera.matrixWorld); reflectionProjection.copy(camera.projectionMatrix); reflectionPlayer.copy(player.matrixWorld);
+  };
   const ring = mesh(scene, new THREE.RingGeometry(.66, .75, 40), material('#dfc68c', { side: THREE.DoubleSide, transparent: true, opacity: .8 }), [0, .055, 0]); ring.rotation.x = -Math.PI / 2; ring.castShadow = false;
   const shield = mesh(player, new THREE.SphereGeometry(1.2, 20, 12), material('#e7c265', { transparent: true, opacity: .2, wireframe: true }), [0, 1.1, 0]);
   const friends = Array.from({ length: 3 }, () => { const object = smurf(); scene.add(object); return object; });

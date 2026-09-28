@@ -6,6 +6,7 @@ import './test-cloud-leaderboard.mjs';
 import './test-world.mjs';
 import './test-interior.mjs';
 import './test-arena.mjs';
+import './test-rendering.mjs';
 import assert from 'node:assert/strict';
 import {readFile,readdir,stat} from 'node:fs/promises';
 import {parseHTML} from 'linkedom';

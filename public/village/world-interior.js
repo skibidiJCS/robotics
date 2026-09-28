@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import { material, mesh, ball, block, branch } from './world-models.js';
+import { material, mesh, ball, block, branch, mergeScenery } from './world-models.js';
 
 import { createDisplay } from './world-furniture.js';
 
@@ -41,6 +41,7 @@ export function createInterior(textures) {
  let stations = [], displays = [], target = null;
  const rooms = new Map();
  const position = new THREE.Vector3(0, 0, 7);
+ mergeScenery(group);
  function enter(place, sections) {
   furnishing.clear();
   const cached = rooms.get(place.id);
@@ -56,7 +57,7 @@ export function createInterior(textures) {
     const arc = Math.min(2.05, .5 + sections.length * .22);
     const angle = sections.length === 1 ? 0 : -arc + i * arc * 2 / (sections.length - 1);
     const x = Math.sin(angle) * 10.6, z = -Math.cos(angle) * 10.6;
-    const alcove = new THREE.Group(); alcove.position.set(x, 0, z); alcove.rotation.y = Math.atan2(-x, -z); alcove.userData.station = i; furnishing.add(alcove);
+    const alcove = new THREE.Group(); alcove.position.set(x, 0, z); alcove.rotation.y = Math.atan2(-x, -z); alcove.userData.station = i; alcove.userData.batchRoot = true; furnishing.add(alcove);
     const color = ['#577f76', '#527888', '#ae7653', '#7f7893'][i % 4];
     block(alcove, color, [0, .035, .4], [4.6, .045, 4.2]);
     for (const side of [-1, 1]) block(alcove, '#d8b779', [side * 2.18, .065, .4], [.06, .01, 4]);
@@ -72,6 +73,7 @@ export function createInterior(textures) {
     const marker = mesh(furnishing, new THREE.RingGeometry(.32, .4, 32), material('#e4c788', { side: THREE.DoubleSide }), [x * .75, .07, z * .75]); marker.rotation.x = -Math.PI / 2;
     return { ...section, index: i, x, z };
    });
+   mergeScenery(furnishing);
    rooms.set(place.id, { stations, displays, objects: [...furnishing.children] });
   }
   position.set(0, 0, 7); target = null; group.visible = true;

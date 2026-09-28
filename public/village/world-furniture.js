@@ -21,7 +21,7 @@ export function table(parent, width = 3, depth = 1.6, height = 1.5) {
 }
 export function createDisplay(kind, index = 0) {
  const group = new THREE.Group(), movers = [];
- const spin = (object, axis, speed, base = 0, swing = 0) => movers.push(time => { object.rotation[axis] = base + (swing ? Math.sin(time * speed) * swing : time * speed); });
+ const spin = (object, axis, speed, base = 0, swing = 0) => { object.userData.batchRoot = true; movers.push(time => { object.rotation[axis] = base + (swing ? Math.sin(time * speed) * swing : time * speed); }); };
  if (kind === 'library') {
   bookshelf(group, 3.3, 3.8);
   const book = new THREE.Group(); book.position.set(0, 1.7, .85); group.add(book);
@@ -46,7 +46,7 @@ export function createDisplay(kind, index = 0) {
    block(group, '#374b49', [0, 2.3, -.1], [2.35, 1.45, .2]);
    block(group, material('#173e42', { emissive: '#245254', emissiveIntensity: .45 }), [0, 2.3, .015], [2.1, 1.2, .04]);
    for (let i = 0; i < 6; i++) block(group, i % 2 ? '#c5d987' : '#8cc9c7', [-.23 + (i % 2) * .15, 2.68 - i * .16, .045], [1.1 - (i % 3) * .2, .035, .01]);
-   const cursor = block(group, '#eacb74', [.62, 1.88, .05], [.08, .08, .02]); movers.push(time => { cursor.visible = Math.sin(time * 4) > -.3; });
+   const cursor = block(group, '#eacb74', [.62, 1.88, .05], [.08, .08, .02]); cursor.userData.batchRoot = true; movers.push(time => { cursor.visible = Math.sin(time * 4) > -.3; });
    block(group, '#b9a57a', [0, 1.63, .5], [1.7, .06, .4]);
   } else {
    block(group, '#466c73', [0, 1.99, 0], [1.8, .65, .8]);

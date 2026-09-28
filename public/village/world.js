@@ -97,7 +97,6 @@ function action(name, value) {
  }
 }
 function frame(now) {
- if (route !== 'play' && now - last < 1000 / 30) { frameId = requestAnimationFrame(frame); return; }
  const elapsed = Math.max(0, (now - last) / 1000), dt = Math.min(elapsed, .05); last = now;
  if (!document.hidden) {
   if (active()) {

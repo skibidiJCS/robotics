@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
 import { placeAngle } from './world-data.js';
 
 export function random(seed = 7) {
@@ -225,4 +226,33 @@ export function exhibit(id) {
     if (id === 'team') for (let i = 0; i < 2; i++) { const friend = smurf(); friend.scale.setScalar(.65); friend.position.set(i * 1.7 - .85, .76, 0); group.add(friend); }
   }
   return group;
+}
+
+export function mergeScenery(root) {
+  root.updateWorldMatrix(true, true);
+  const inverse = root.matrixWorld.clone().invert(), batches = new Map(), parents = new Set();
+  function collect(object) {
+    if (object !== root && object.userData.batchRoot) {
+      for (let parent = object.parent; parent && parent !== root; parent = parent.parent) parents.add(parent);
+      mergeScenery(object); return;
+    }
+    for (const child of object.children) collect(child);
+    if (!object.isMesh || object === root || object.isInstancedMesh || object.isWater || Array.isArray(object.material) || object.material.transparent) return;
+    const key = `${object.material.uuid}:${object.castShadow}:${object.receiveShadow}:${!!object.geometry.index}:${Object.keys(object.geometry.attributes).sort().join(',')}`;
+    if (!batches.has(key)) batches.set(key, []);
+    batches.get(key).push(object);
+  }
+  collect(root);
+  for (const batch of batches.values()) {
+    const objects = batch.filter(object => !parents.has(object));
+    if (objects.length < 2) continue;
+    const parts = objects.map(object => object.geometry.clone().applyMatrix4(inverse.clone().multiply(object.matrixWorld)));
+    const geometry = mergeGeometries(parts);
+    if (geometry) {
+      const merged = mesh(root, geometry, objects[0].material);
+      merged.castShadow = objects[0].castShadow; merged.receiveShadow = objects[0].receiveShadow;
+      objects.forEach(object => object.removeFromParent());
+    }
+    parts.forEach(part => part.dispose());
+  }
 }
